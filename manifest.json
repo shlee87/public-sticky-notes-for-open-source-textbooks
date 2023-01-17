@@ -8,7 +8,7 @@
     "default_title": "execute.js will run (watch the Chrome DevTools' console)"
   },
   "action": {
-    "default_icon": "picture1.png",
+    "default_icon": "picture2.png",
     "default_popup": "popup.html"
   },
   "content_scripts": [
