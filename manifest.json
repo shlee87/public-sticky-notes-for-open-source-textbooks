@@ -1,8 +1,8 @@
 {
-  "name": "Fresh Chrome Extension",
-  "description": "Fully functional, useful bare minimum Google Chrome extension boilerplate [Manifest V3].",
+  "name": "StickIT",
+  "description": "Sticky Notes On Open Source Textbooks",
   "homepage_url": "https://github.com/llagerlof/fresh-chrome-extension",
-  "version": "2.0.0",
+  "version": "1.0.0",
   "manifest_version": 3,
   "action": {
     "default_title": "execute.js will run (watch the Chrome DevTools' console)"
@@ -37,6 +37,12 @@
     "tabs",
     "scripting"
   ],
+  "icons": {
+    "16": "icons/StickIT_16x16.png",
+    "48": "icons/StickIT_48x48.png",
+    "64": "icons/StickIT_64x64.png",
+    "128": "icons/StickIT_128x128.png"
+  },
   "host_permissions": [
     "https://*/*",
     "http://*/*"
