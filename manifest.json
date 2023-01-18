@@ -7,6 +7,10 @@
   "action": {
     "default_title": "execute.js will run (watch the Chrome DevTools' console)"
   },
+  "action": {
+    "default_icon": "picture2.png",
+    "default_popup": "popup.html"
+  },
   "content_scripts": [
     {
       "run_at": "document_start",
@@ -16,6 +20,7 @@
         "http://*/*"
       ]
     },
+
     {
       "run_at": "document_idle",
       "js": [ "after.js" ],
