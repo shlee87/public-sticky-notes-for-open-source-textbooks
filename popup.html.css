@@ -1,12 +1,26 @@
 body {
+    width: 100%;
+    height: 100%;
     margin: 0;
     font-family: "Lato", sans-serif;
   }
   
+  canvas {
+    background-color: #ccc;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+}
+
   .sidebar {
     margin: 0;
     padding: 0;
-    width: 100px;
+    width: 75px;
     background-color: #f1f1f1;
     position: fixed;
     height: 100%;
@@ -31,9 +45,9 @@ body {
   }
   
   div.content {
-    margin-left: 200px;
+    margin-left: 100px;
     padding: 1px 16px;
-    height: 1000px;
+    height: 300px;
   }
   
   /* @media screen and (max-width: 700px) {
@@ -46,7 +60,7 @@ body {
     div.content {margin-left: 0;}
   } */
   
-  @media screen and (max-width: 400px) {
+  @media screen and (max-width: 500px) and (min-width: 100px) and (max-height: 500px) and (min-height: 100px) {
     .sidebar a {
       text-align: center;
       float: none;

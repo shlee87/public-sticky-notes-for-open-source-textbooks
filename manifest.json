@@ -5,10 +5,7 @@
   "version": "1.0.0",
   "manifest_version": 3,
   "action": {
-    "default_title": "execute.js will run (watch the Chrome DevTools' console)"
-  },
-  "action": {
-    "default_icon": "picture2.png",
+    "default_title": "execute.js will run (watch the Chrome DevTools' console)",
     "default_popup": "popup.html"
   },
   "content_scripts": [
