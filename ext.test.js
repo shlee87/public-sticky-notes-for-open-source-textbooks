@@ -1,6 +1,7 @@
 import puppeteer from "puppeteer";
 const path = require('path');
 const EXTENSION_PATH = path.join(__dirname, "sticky-chrome-extension");
+const CLEAN_UP = true;
 
 const getExtensionId = async (browser) => {
     const targets = await browser.targets();
@@ -12,22 +13,24 @@ const getExtensionId = async (browser) => {
 
 let browserArray = [];
 describe("Test Extension", () => {
-    afterAll(async () => {
-        console.log("clean up");
-        try {
-            await Promise.all(
-                browserArray.map(async (browser) => {
-                    try {
-                        const closeBrowser = await browser.close();
-                    } catch (e) {
-                        //no-op
-                    }
-                })
-            );
-        } catch (e) {
-            //no-op
-        }
-    });
+    if (CLEAN_UP) {
+        afterAll(async () => {
+            console.log("clean up");
+            try {
+                await Promise.all(
+                    browserArray.map(async (browser) => {
+                        try {
+                            const closeBrowser = await browser.close();
+                        } catch (e) {
+                            //no-op
+                        }
+                    })
+                );
+            } catch (e) {
+                //no-op
+            }
+        });
+    };
 
     // Test Cases
     it("Success Test", async () => {
