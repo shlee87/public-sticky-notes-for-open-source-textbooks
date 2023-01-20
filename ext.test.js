@@ -30,7 +30,7 @@ describe("Test Extension", () => {
     });
 
     // Test Cases
-    it("First Test", async () => {
+    it("Success Test", async () => {
         const browser = await puppeteer.launch({
             headless: false,
             devtools: true,
@@ -49,10 +49,36 @@ describe("Test Extension", () => {
 
         await page.goto(`chrome-extension://${extensionId}/popup.html`);
         await page.bringToFront();
-        await page.waitForSelector('[id="homeTab"]');
-        const textEl = await page.$('[id="homeTab"]')
+        await page.waitForSelector('[id="profileTab"]');
+        const textEl = await page.$('[id="profileTab"]')
         const text = await textEl.evaluate((e) => e.innerText);
         console.log("string", text);
-        expect(text).toEqual(expect.stringContaining("Home"));
+        expect(text).toEqual(expect.stringContaining("Profile"));
+    });
+
+    it("Fail Test", async () => {
+        const browser = await puppeteer.launch({
+            headless: false,
+            devtools: true,
+            args: [
+                `--disable-extensions-except=${EXTENSION_PATH}`,
+                `--load-extension=${EXTENSION_PATH}`,
+                //`--user-agent-PuppeteerAgent`,
+            ],
+        });
+
+        browserArray.push(browser);
+
+        var [page] = await browser.pages();
+        await page.goto(`https://google.com`);
+        const extensionId = await getExtensionId(browser);
+
+        await page.goto(`chrome-extension://${extensionId}/popup.html`);
+        await page.bringToFront();
+        await page.waitForSelector('[id="profileTab"]');
+        const textEl = await page.$('[id="profileTab"]')
+        const text = await textEl.evaluate((e) => e.innerText);
+        console.log("string", text);
+        expect(text).toEqual(expect.stringContaining("NotProfile"));
     });
 });
