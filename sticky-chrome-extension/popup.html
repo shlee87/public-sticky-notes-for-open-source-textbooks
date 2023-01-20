@@ -7,17 +7,38 @@
 <body>
 
 <div class="sidebar">
-  <a class="active" href="#profile" id="profileTab">Profile</a>
-  <a href="#bookmarkss" id="bookmarksTab">Bookmarks</a>
-  <a href="#search" id="searchTab">Search</a>
-  <a href="#about" id="aboutTab">About</a>
+  <div class="sidebar-tabs">
+    <a class="tabs__button" data-tab-value="#profileTab" id="profileTab">Profile</a>
+    <a class="tabs__button" data-tab-value="#bookmarksTab" id="bookmarksTab">Bookmarks</a>
+    <a class="tabs__button" data-tab-value="#searchTab" id="searchTab">Search</a>
+    <a class="tabs__button" data-tab-value="#aboutTab" id="aboutTab">About</a>
+  </div>
+
+    <div class="tabs__content tabs__content--active" id="profileTab" data-tab-info>
+        <p>Welcome to GeeksforGeek.</p>
+  
+    </div>
+    <div class="tabs__content" id="bookmarksTab" data-tab-info>
+        <p>Hello Everyone.</p>
+  
+    </div>
+    <div class="tabs__content" id="searchTab" data-tab-info>
+        <p>Learn cool stuff.</p>
+  
+    </div>
+    <div class="tabs__content" id="aboutTab" data-tab-info>
+        <p>About.</p>
+
+    </div>
+  
 </div>
 
-<div class="content">
-  <h2>StickIT SidebarTest</h2>
-  <p>test</p>
-  <p>test</p>
-</div>
+<script src="popupscript.js">
+document.addEventListener("DOMContentLoaded", () => 
+  {
+    setupTabs();
+  });
+</script> 
 
 </body>
 </html>
