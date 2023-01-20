@@ -5,7 +5,9 @@
   "version": "1.0.0",
   "manifest_version": 3,
   "action": {
-    "default_title": "execute.js will run (watch the Chrome DevTools' console)"
+    "default_title": "execute.js will run (watch the Chrome DevTools' console)",
+    "default_icon": "icons/Picture2.png",
+    "default_popup": "popup.html"
   },
   "content_scripts": [
     {
@@ -16,6 +18,7 @@
         "http://*/*"
       ]
     },
+
     {
       "run_at": "document_idle",
       "js": [ "after.js" ],
