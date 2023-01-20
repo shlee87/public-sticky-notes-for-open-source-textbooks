@@ -37,7 +37,7 @@ describe("Test Extension", () => {
             args: [
                 `--disable-extensions-except=${EXTENSION_PATH}`,
                 `--load-extension=${EXTENSION_PATH}`,
-                `--user-agent-PuppeteerAgent`,
+                //`--user-agent-PuppeteerAgent`,
             ],
         });
 
@@ -51,7 +51,6 @@ describe("Test Extension", () => {
         await page.bringToFront();
         await page.waitForSelector('[id="homeTab"]');
         const textEl = await page.$('[id="homeTab"]')
-        console.log(textEl);
         const text = await textEl.evaluate((e) => e.innerText);
         console.log("string", text);
         expect(text).toEqual(expect.stringContaining("Home"));
