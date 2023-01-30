@@ -1,6 +1,5 @@
 module.exports = {
-    verbose: true,
-    rootDir: ".",
-    testTimeout: 30000,
-    maxWorkers: 3,
+    globalSetup: './setup.js',
+    globalTeardown: './teardown.js',
+    testEnvironment: './puppeteer_environment.js',
 };
