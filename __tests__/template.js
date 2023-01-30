@@ -21,7 +21,7 @@ describe(
             await page.goto('https://google.com');
         }, timeout);
 
-        // Test Case 1
+        // Chrome Extension Opens
         it("Open Chrome Extension", async () => {
             // Get the extension id if needed
             const extensionId = await getExtensionId(browser);
@@ -37,6 +37,8 @@ describe(
             const url = page.url();
             expect(url).toEqual(`chrome-extension://${extensionId}/popup.html`);
         })
+
+        // More Tests For Feature below ...
     },
     timeout,
 );
