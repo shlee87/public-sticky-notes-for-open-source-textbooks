@@ -1,8 +1,8 @@
-const Highlighter = document.createElement("highlighter");
-document.body.appendChild(Highlighter);
+const Highlighter = document.createElement("medium-highlighter");
+document.body.appendChild(mediumHighlighter);
 
 const setMarkerPosition = (markerPosition) =>
-  Highlighter.setAttribute(
+  mediumHighlighter.setAttribute(
     "markerPosition",
     JSON.stringify(markerPosition)
   );
