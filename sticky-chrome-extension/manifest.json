@@ -1,7 +1,6 @@
 {
   "name": "StickIT",
   "description": "Sticky Notes On Open Source Textbooks",
-  "homepage_url": "https://github.com/llagerlof/fresh-chrome-extension",
   "version": "1.0.0",
   "manifest_version": 3,
   "action": {
