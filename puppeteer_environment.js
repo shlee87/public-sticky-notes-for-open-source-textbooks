@@ -10,7 +10,6 @@ class PuppeteerEnvironment extends NodeEnvironment {
     constructor(config) {
         super(config);
     }
-
     async setup() {
         await super.setup();
         // get the wsEndpoint
@@ -18,23 +17,19 @@ class PuppeteerEnvironment extends NodeEnvironment {
         if (!wsEndpoint) {
             throw new Error('wsEndpoint not found');
         }
-
         // connect to puppeteer
         this.global.__BROWSER_GLOBAL__ = await puppeteer.connect({
             browserWSEndpoint: wsEndpoint,
         });
     }
-
     async teardown() {
         if (this.global.__BROWSER_GLOBAL__) {
             this.global.__BROWSER_GLOBAL__.disconnect();
         }
         await super.teardown();
     }
-
     getVmContext() {
         return super.getVmContext();
     }
 }
-
 module.exports = PuppeteerEnvironment;
