@@ -1,26 +1,52 @@
 <!DOCTYPE html>
+<style type="text/css">
+    body {
+        margin: 5px;
+        color: #5C5C5C;
+        background-color: lightyellow;
+    }
+
+    h1 {
+        font-size: 15px;
+        text-align: center;
+    }
+</style>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
     <title>Note</title>
 </head>
-<style type="text/css">
-    body
-    {
-        margin: 5px;
-        background-color: lightyellow;
-    }
-    h1
-    {
-        font-size: 15px;
-        text-align: center;
-    }
-</style>
+
 <body>
-    <form>
-        <br> <input type="text" name="note">
-        <br>
-    </form>
+    Write note here: <br />
+    <input id="note" type="text" maxlength="500" onkeyup="Allow()">
+    <input type="submit" value="Save/Show" onclick="insert()" />
+    <div id="display"></div>
+
+
+    <script type="text/javascript">
+        var notes = [];
+        var noteInput = document.getElementById("note");
+        var messageBox = document.getElementById("display");
+
+        function Allow() {
+            if (!user.note.value.match(/[a-zA-Z]$/) && user.note.value != "") {
+                user.note.value = "";
+                alert("Please Enter only alphabets");
+            }
+        }
+
+        function insert() {
+            notes.push(noteInput.value);
+            clearAndShow();
+        }
+
+        function clearAndShow() {
+            noteInput.value = "";
+            messageBox.innerHTML = "";
+            messageBox.innerHTML += "Notes: <br/><br/>" + notes.join("<br/><br/>");
+        }
+    </script>
 </body>
 </html>
