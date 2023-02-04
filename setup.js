@@ -3,7 +3,7 @@ const os = require('os');
 const path = require('path');
 const puppeteer = require('puppeteer');
 // Enter path to extension folder here
-const EXTENSION_PATH = "C:/Users/Drew/Documents/github/public-sticky-notes-for-open-source-textbooks/sticky-chrome-extension";
+const EXTENSION_PATH = "/Users/seonghoonyi/Documents/GitHub/public-sticky-notes-for-open-source-textbooks/sticky-chrome-extension";
 
 const DIR = path.join(os.tmpdir(), 'jest_puppeteer_global_setup');
 
