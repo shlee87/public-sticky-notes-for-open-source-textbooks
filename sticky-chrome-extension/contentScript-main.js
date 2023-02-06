@@ -52,7 +52,7 @@ function insertHtml() {
         z-index: 1000;
         top: 0;
         margin: 20px;
-        background-color: #2c5b2c;
+        background-color: #FFFFCC;
         visibility: hidden;
         padding: 10px;
     }
