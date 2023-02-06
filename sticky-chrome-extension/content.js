@@ -1,4 +1,4 @@
-const Highlighter = document.createElement("medium-highlighter");
+const mediumHighlighter = document.createElement("medium-highlighter");
 document.body.appendChild(mediumHighlighter);
 
 const setMarkerPosition = (markerPosition) =>

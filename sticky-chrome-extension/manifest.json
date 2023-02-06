@@ -14,7 +14,7 @@
       "js": [
         "before.js",
         "node_modules/@webcomponents/custom-elements/custom-elements.min.js",
-        "highlighting_feature.js",
+        "medium-highlighter.js",
         "content.js"
       ],
       "matches": [

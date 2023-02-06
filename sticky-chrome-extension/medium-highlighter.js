@@ -2,8 +2,7 @@ const highlightColor = "rgb(213, 234, 255)";
 
 const template = `
   <template id="highlightTemplate">
-    <span class="highlight" style="background-color: ${highlightColor}; 
-    display: inline"></span>
+    <span class="highlight" style="background-color: ${highlightColor}; display: inline"></span>
   </template>
 
   <button id="mediumHighlighter">
@@ -90,4 +89,4 @@ class MediumHighlighter extends HTMLElement {
   }
 }
 
-window.customElements.define("medium-highlighter", Highlighter);
+window.customElements.define("medium-highlighter", MediumHighlighter);
