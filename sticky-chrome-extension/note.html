@@ -13,17 +13,23 @@
 </style>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="utf-8" />
     <title>Note</title>
 </head>
 
 <body>
-    Write note here: <br />
-    <input id="note" type="text" maxlength="500" onkeyup="Allow()">
-    <input type="submit" value="Save/Show" onclick="insert()" />
-    <div id="display"></div>
+    <form class="flex-col" style="display:flex;flex-direction: column;gap: 10px;">
+        <span>
+            Write note here
+        </span>
+        <textarea name="note" id="" cols="30" rows="10" onkeyup="Allow()"></textarea>
+        <!-- <input id="note" type="text" maxlength="500" onkeyup="Allow()"> -->
+        <input type="submit" value="Save/Show" onclick="noteExInsert()" />
+       
 
+    </form>
 
     <script type="text/javascript">
         var notes = [];
@@ -37,16 +43,17 @@
             }
         }
 
-        function insert() {
+        function noteExInsert() {
             notes.push(noteInput.value);
-            clearAndShow();
+            NoteExclearAndShow();
         }
 
-        function clearAndShow() {
+        function NoteExclearAndShow() {
             noteInput.value = "";
             messageBox.innerHTML = "";
             messageBox.innerHTML += "Notes: <br/><br/>" + notes.join("<br/><br/>");
         }
     </script>
 </body>
+
 </html>
