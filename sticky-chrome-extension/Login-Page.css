@@ -23,10 +23,11 @@
 }
 
 .u-section-1 .u-btn-1 {
-  padding: 10px 30px;
+  padding: 1px 1px;
 }
 
 .u-section-1 .u-btn-2 {
+  background-image: none;
   margin: -66px auto 60px;
   padding: 10px 259px 10px 258px;
 }
@@ -49,17 +50,15 @@
   }
 
   .u-section-1 .u-form-1 {
-    margin-top: 48px;
+    margin-top: 47px;
     margin-right: initial;
     margin-left: initial;
     width: auto;
   }
 
   .u-section-1 .u-btn-2 {
-    margin-left: 0;
-    margin-right: 0;
-    margin-bottom: 35px;
     padding-right: 180px;
     padding-left: 179px;
+    margin: -65px 0 35px;
   }
 }
