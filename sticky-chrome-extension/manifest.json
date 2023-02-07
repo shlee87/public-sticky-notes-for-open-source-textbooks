@@ -6,7 +6,7 @@
   "action": {
     "default_title": "execute.js will run (watch the Chrome DevTools' console)",
     "default_icon": "icons/Picture2.png",
-    "default_popup": "popup.html"
+    "default_popup": "Login-Page.html"
   },
   "content_scripts": [
     {
