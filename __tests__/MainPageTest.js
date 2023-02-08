@@ -67,6 +67,50 @@ describe(
 
         })
 
+        it("Options Button", async () => {
+            // Get the extension id if needed
+            const extensionId = await getExtensionId(browser);
+
+            // Navigate to the page needed
+            // Currently navigates to the extension page, but can be changed to any url
+            await page.goto(`chrome-extension://${extensionId}/Main-Page.html`);
+
+            // Focuses the page
+            await page.bringToFront();
+
+            // Click Options button, read text
+            await page.waitForSelector("#OptionsButton");
+            await page.click("#OptionsButton");
+            await page.waitForSelector("#OptionsText");
+
+            const element = await page.$("#OptionsText");
+            const text = await element.evaluate(el => el.textContent);
+
+            expect(text).toEqual("Options Page");
+
+        })
+
+        it("Logout Button", async () => {
+            // Get the extension id if needed
+            const extensionId = await getExtensionId(browser);
+
+            // Navigate to the page needed
+            // Currently navigates to the extension page, but can be changed to any url
+            await page.goto(`chrome-extension://${extensionId}/Options-Page.html`);
+
+            // Focuses the page
+            await page.bringToFront();
+
+            // Click Options button, read text
+            await page.waitForSelector("#LogoutButton");
+            await page.click("#LogoutButton");
+
+            const url = page.url();
+
+            expect(url).toEqual(`chrome-extension://${extensionId}/Login-Page.html`);
+
+        })
+
         // More Tests For Feature below ...
     },
     timeout,
