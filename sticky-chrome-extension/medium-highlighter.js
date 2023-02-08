@@ -1,5 +1,8 @@
+
+// Define the color to use for highlighting text
 const highlightColor = "rgb(213, 234, 255)";
 
+// Define the template for the highlighter button
 const template = `
   <template id="highlightTemplate">
     <span class="highlight" style="background-color: ${highlightColor}; display: inline"></span>
@@ -10,6 +13,7 @@ const template = `
   </button>
 `;
 
+// Define the styles for the highlighter button
 const styled = ({ display = "none", left = 0, top = 0 }) => `
   #mediumHighlighter {
     align-items: center;
@@ -34,28 +38,33 @@ const styled = ({ display = "none", left = 0, top = 0 }) => `
   }
 `;
 
+// Define the custom element that represents the button and text highlighting functionality
 class MediumHighlighter extends HTMLElement {
   constructor() {
     super();
     this.render();
   }
-
+// Get the marker position from the element's attributes
   get markerPosition() {
     return JSON.parse(this.getAttribute("markerPosition") || "{}");
   }
 
+  // Get the style element in the shadow root
   get styleElement() {
     return this.shadowRoot.querySelector("style");
   }
 
+   // Get the highlight template in the shadow root
   get highlightTemplate() {
     return this.shadowRoot.getElementById("highlightTemplate");
   }
 
+  // Specify the observed attributes for this custom element
   static get observedAttributes() {
     return ["markerPosition"];
   }
 
+  // Render the button and add the click event listener
   render() {
     this.attachShadow({ mode: "open" });
     const style = document.createElement("style");
@@ -67,12 +76,14 @@ class MediumHighlighter extends HTMLElement {
       .addEventListener("click", () => this.highlightSelection());
   }
 
+  // Update the marker position when the attribute changes
   attributeChangedCallback(name, oldValue, newValue) {
     if (name === "markerPosition") {
       this.styleElement.textContent = styled(this.markerPosition);
     }
   }
 
+  // Highlight the selected text
   highlightSelection() {
     var userSelection = window.getSelection();
     for (let i = 0; i < userSelection.rangeCount; i++) {
@@ -81,6 +92,7 @@ class MediumHighlighter extends HTMLElement {
     window.getSelection().empty();
   }
 
+  // Highlight the range of text
   highlightRange(range) {
     const clone =
       this.highlightTemplate.cloneNode(true).content.firstElementChild;
