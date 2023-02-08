@@ -20,7 +20,12 @@
 
     {
       "run_at": "document_idle",
-      "js": [ "after.js" ],
+      "js": [
+        "after.js",
+        "node_modules/@webcomponents/custom-elements/custom-elements.min.js",
+        "medium-highlighter.js",
+        "content.js" 
+      ],
       "matches": [
         "https://*/*",
         "http://*/*"
