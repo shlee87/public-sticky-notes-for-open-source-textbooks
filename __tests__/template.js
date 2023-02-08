@@ -1,4 +1,4 @@
-const timeout = 5000000;
+const timeout = 5000;
 const browser = globalThis.__BROWSER_GLOBAL__;
 
 // Function to get the id of the extension to be able to navigate to the extension page and interact with it
@@ -28,14 +28,14 @@ describe(
 
             // Navigate to the page needed
             // Currently navigates to the extension page, but can be changed to any url
-            await page.goto(`chrome-extension://${extensionId}/Login-Page.html`);
+            await page.goto(`chrome-extension://${extensionId}/popup.html`);
 
             // Focuses the page
             await page.bringToFront();
 
             // Write Test here ...
             const url = page.url();
-            expect(url).toEqual(`chrome-extension://${extensionId}/Login-Page.html`);
+            expect(url).toEqual(`chrome-extension://${extensionId}/popup.html`);
         })
 
         // More Tests For Feature below ...
