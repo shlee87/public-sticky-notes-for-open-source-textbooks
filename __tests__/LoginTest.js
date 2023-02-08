@@ -13,7 +13,7 @@ const getExtensionId = async (browser) => {
 // Start of the feature test
 // Describe the feature
 describe(
-    '/ (Feature Name)',
+    '/ (Login Page)',
     () => {
         let page;
         beforeAll(async () => {
@@ -22,7 +22,7 @@ describe(
         }, timeout);
 
         // Chrome Extension Opens
-        it("Open Chrome Extension", async () => {
+        it("Login Button", async () => {
             // Get the extension id if needed
             const extensionId = await getExtensionId(browser);
 
@@ -33,9 +33,13 @@ describe(
             // Focuses the page
             await page.bringToFront();
 
-            // Write Test here ...
+            // Click login button
+            await page.waitForSelector("#LoginButton");
+            await page.click("#LoginButton");
             const url = page.url();
-            expect(url).toEqual(`chrome-extension://${extensionId}/Login-Page.html`);
+
+            expect(url).toEqual(`chrome-extension://${extensionId}/Main-Page.html`);
+
         })
 
         // More Tests For Feature below ...
