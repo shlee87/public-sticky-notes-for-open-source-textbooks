@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "manifest_version": 3,
   "action": {
-    "default_title": "execute.js will run (watch the Chrome DevTools' console)",
+    "default_title": "execute.js",
     "default_icon": "icons/Picture2.png",
     "default_popup": "Login-Page.html"
   },

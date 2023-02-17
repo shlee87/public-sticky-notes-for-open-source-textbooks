@@ -1,15 +1,10 @@
 {
-  "name": "medium-highlighter",
-  "version": "1.0.0",
-  "description": "",
-  "main": "medium-highlighter.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "Marius Bongarts",
-  "license": "ISC",
   "dependencies": {
+    "aws-amplify": "5.0.14",
+    "@aws-amplify/ui-vue": "3.1.7",
     "@webcomponents/custom-elements": "^1.4.3"
   }
 }
