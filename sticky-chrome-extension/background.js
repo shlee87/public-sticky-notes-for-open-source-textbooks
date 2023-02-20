@@ -58,7 +58,7 @@ export const authenticateUser = async (session) => {
   let userSession  = new CognitoUserSession(sessionData);
   const userData = {
     Username: userSession.getIdToken().payload['cognito:username'],
-    Pool: new CognitoUserPool({UserPoolId: YOUR_USER_POOL_ID, ClientId: YOUR_APP_CLIENT_ID})
+    Pool: new CognitoUserPool({UserPoolId: "us-east-2_msJcUyPZi", ClientId: "5mm44lds4fsqcao4kdnp0k68ch"})
   }
   
   // Make a new cognito user

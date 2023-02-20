@@ -6,5 +6,11 @@
     "aws-amplify": "5.0.14",
     "@aws-amplify/ui-vue": "3.1.7",
     "@webcomponents/custom-elements": "^1.4.3"
+  },
+
+  {
+    "type": "module"
   }
 }
+
+
