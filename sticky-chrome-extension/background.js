@@ -1,7 +1,5 @@
 chrome.action.onClicked.addListener(execScript);
 
-
-
 async function execScript() {
   const tabId = await getTabId();
   chrome.scripting.executeScript({
