@@ -4,7 +4,7 @@
   },
   "dependencies": {
     "aws-amplify": "5.0.14",
-    "@aws-amplify/ui-vue": "3.1.7",
+    "amazon-cognito-identity-js": "6.1.2",
     "@webcomponents/custom-elements": "^1.4.3"
   }
 }

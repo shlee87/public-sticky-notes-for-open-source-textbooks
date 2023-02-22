@@ -22,11 +22,11 @@
 
     {
       "run_at": "document_idle",
-      "js": [ 
+      "js": [
         "after.js",
         "node_modules/@webcomponents/custom-elements/custom-elements.min.js",
         "medium-highlighter.js",
-        "content.js" 
+        "content.js"
       ],
       "matches": [
         "https://*/*",
@@ -35,7 +35,8 @@
     }
   ],
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "background.js",
+    "type": "module"
   },
   "permissions": [
     "tabs",
