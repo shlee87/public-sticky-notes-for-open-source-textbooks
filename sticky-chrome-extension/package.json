@@ -6,5 +6,11 @@
     "aws-amplify": "5.0.14",
     "amazon-cognito-identity-js": "6.1.2",
     "@webcomponents/custom-elements": "^1.4.3"
+  },
+
+  {
+    "type": "module"
   }
 }
+
+
