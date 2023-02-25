@@ -1,15 +1,8 @@
 {
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "dependencies": {
-    "aws-amplify": "5.0.14",
-    "amazon-cognito-identity-js": "6.1.2",
+    "aws-sdk": "2.1323.0",
+    "aws-amplify": "5.0.16",
     "@webcomponents/custom-elements": "^1.4.3"
-  },
-
-  {
-    "type": "module"
   }
 }
 
