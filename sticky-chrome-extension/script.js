@@ -1,4 +1,6 @@
-import Amplify, { Auth } from './aws-amplify';
+import Amplify from './aws-amplify';
+import Auth from './@aws-amplify/auth';
+import awsconfig from './aws-exports';
 
 // Configure Amplify
 Amplify.configure({
@@ -10,11 +12,11 @@ Amplify.configure({
 });
 
 // Render login component
-const loginComponent = AmplifyUI.signIn({});
+const loginComponent = Amplify.UI.signIn({});
 document.getElementById('login').appendChild(loginComponent);
 
 // Handle login submission
-const loginForm = document.getElementById('signinForm');
+const loginForm = document.getElementById('signInForm');
 loginForm.addEventListener('submit', async (event) => {
     event.preventDefault();
     const username = loginForm.querySelector('input[name="username"]').value;
