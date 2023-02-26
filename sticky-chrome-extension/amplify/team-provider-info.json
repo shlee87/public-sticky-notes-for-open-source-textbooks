@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-stickit-dev-135945-authRole",
+      "UnauthRoleArn": "arn:aws:iam::541363104874:role/amplify-stickit-dev-135945-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::541363104874:role/amplify-stickit-dev-135945-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-stickit-dev-135945-deployment",
+      "UnauthRoleName": "amplify-stickit-dev-135945-unauthRole",
+      "StackName": "amplify-stickit-dev-135945",
+      "StackId": "arn:aws:cloudformation:us-east-2:541363104874:stack/amplify-stickit-dev-135945/1f8e39e0-b610-11ed-9d0f-0691fbfd0bdf",
+      "AmplifyAppId": "d1abdemopwtw5d"
+    },
+    "categories": {
+      "auth": {
+        "stickitccffd896": {}
+      }
+    }
+  }
+}
