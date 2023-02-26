@@ -1,14 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title>My Chrome Extension</title>
+    <meta charset="UTF-8">
+    <title>Login</title>
 </head>
 <body>
-    <div id="app">
-        <h1>My Chrome Extension</h1>
-        <div id="login"></div>
-    </div>
-    <script type="module" src="./script.js"></script>
+    <h1>Sign In</h1>
+    <form id="sign-in-form">
+        <label for="username-input">Username</label>
+        <input type="text" id="username-input" />
+        <br>
+        <label for="password-input">Password:</label>
+        <input type="password" id="password-input" required>
+        <br>
+        <button type="submit">Sign In</button>
+    </form>
+
+    <script src="dist/bundle.js"></script>
 </body>
 </html>
