@@ -71,6 +71,7 @@ class CommenterClass extends HTMLElement {
       .addEventListener("click", () => 
       {
         this.commentSelection();
+        
       }
       );
   }
@@ -100,4 +101,6 @@ class CommenterClass extends HTMLElement {
   }
 }
 
+/*
 window.customElements.define("stickit-commenter", CommenterClass);
+*/

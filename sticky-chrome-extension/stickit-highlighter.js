@@ -89,4 +89,6 @@ class HighlighterClass extends HTMLElement {
   }
 }
 
+/*
 window.customElements.define("stickit-highlighter", HighlighterClass);
+*/
