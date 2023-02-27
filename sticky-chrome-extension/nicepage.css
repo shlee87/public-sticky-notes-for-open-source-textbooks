@@ -41706,17 +41706,17 @@ a.u-link.u-text-hover-grey-90:hover {
 }
 @media (max-width: 1199px) {
   .u-header .u-shape-1 {
-    margin-top: 20px;
+    margin-top: -40px;
   }
 
   .u-header .u-shape-2 {
     width: 20px;
-    margin-top: -120px;
+    margin-top: -80px;
   }
 
   .u-header .u-shape-3 {
     width: 20px;
-    margin-top: -30px;
+    margin-top: -20px;
   }
 }
 
