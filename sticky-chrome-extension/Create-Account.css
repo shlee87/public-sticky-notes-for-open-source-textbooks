@@ -55,17 +55,17 @@
 
 .u-section-1 .u-btn-3 {
   background-image: none;
-  margin: -78px 100px 33px 200px;
-  padding: 10px 20px 12px 20px;
+  margin: -78px 150px 33px 230px;
+  padding: 11px 20px 12px 20px;
 }
 
 @media (max-width: 1199px) {
   .u-section-1 .u-btn-2 {
-    margin-left: 0;
+    margin-left: 60px;
   }
 
   .u-section-1 .u-btn-3 {
-    margin-right: 0;
+    margin-right: 70px;
   }
 }
 
