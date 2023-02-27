@@ -57,6 +57,8 @@ document.addEventListener('DOMContentLoaded', function () {
         authenticationFlowType: 'USER_SRP_AUTH'
     });
 
+    const errorMessage = document.getElementById('error-message');
+    const logoutButton = document.getElementById('logout-button');
     const signInForm = document.getElementById('sign-in-form');
     if (signInForm) {
         signInForm.addEventListener('submit', function (event) {
@@ -69,10 +71,27 @@ document.addEventListener('DOMContentLoaded', function () {
                     window.location.href = signInConfig.signInSuccessUrl;
                 })
                 .catch(error => {
-                    console.error('Error signing in:', error);
+                    errorMessage.style.display = 'block';
                 });
         });
-    } else {
-        console.error("Element not found: sign-in-form");
+    }
+    else if (logoutButton) {
+        logoutButton.addEventListener('click', function (event) {
+            event.preventDefault();
+            Auth.signOut()
+                .then(() => {
+                    window.location.href = '/Login-Page.html';
+                })
+                .catch(error => {
+                    console.error('Error signing out:', error);
+                });
+        });
+    }
+    else {
+        Auth.currentAuthenticatedUser()
+            .then(user => {})
+            .catch(error => {
+                window.location.href = '/Login-Page.html';
+            });
     }
 });

@@ -56,8 +56,7 @@
   }
 
   .u-section-1 .u-btn-2 {
-    padding-right: 180px;
-    padding-left: 179px;
-    margin: -10px 0 35px;
+    width: 100%;
+    padding: 10px 12px;
   }
 }
