@@ -28,7 +28,6 @@
 
 .u-section-1 .u-btn-2 {
   background-image: none;
-  margin: -66px auto 60px;
   padding: 10px 259px 10px 258px;
 }
 
@@ -59,6 +58,6 @@
   .u-section-1 .u-btn-2 {
     padding-right: 180px;
     padding-left: 179px;
-    margin: -65px 0 35px;
+    margin: -10px 0 35px;
   }
 }
