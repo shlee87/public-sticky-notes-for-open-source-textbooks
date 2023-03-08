@@ -44,8 +44,9 @@
       "js": [
         "after.js",
         "node_modules/@webcomponents/custom-elements/custom-elements.min.js",
-        "medium-highlighter.js",
-        "content.js"
+        "stickit-highlighter.js",
+        "stickit-commenter.js",
+        "content.js" 
       ],
       "matches": [
         "https://*/*",
