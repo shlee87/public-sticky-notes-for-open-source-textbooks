@@ -57,12 +57,14 @@
     "service_worker": "background.js",
     "type": "module"
   },
+
   "icons": {
     "16": "icons/StickIT_16x16.png",
     "48": "icons/StickIT_48x48.png",
     "64": "icons/StickIT_64x64.png",
     "128": "icons/StickIT_128x128.png"
   },
+
   "host_permissions": [
     "https://*/*",
     "http://*/*"
