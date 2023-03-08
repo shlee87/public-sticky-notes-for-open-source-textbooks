@@ -1,17 +1,21 @@
+
+// Define the color to use for highlighting text
 const highlightColor = "rgb(213, 234, 255)";
 
-const highlightTemplate = `
+// Define the template for the highlighter button
+const template = `
   <template id="highlightTemplate">
     <span class="highlight" style="background-color: ${highlightColor}; display: inline"></span>
   </template>
 
-  <button id="highlightingButton">
+  <button id="mediumHighlighter">
     <svg class="text-marker" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 544 512"><path d="M0 479.98L99.92 512l35.45-35.45-67.04-67.04L0 479.98zm124.61-240.01a36.592 36.592 0 0 0-10.79 38.1l13.05 42.83-50.93 50.94 96.23 96.23 50.86-50.86 42.74 13.08c13.73 4.2 28.65-.01 38.15-10.78l35.55-41.64-173.34-173.34-41.52 35.44zm403.31-160.7l-63.2-63.2c-20.49-20.49-53.38-21.52-75.12-2.35L190.55 183.68l169.77 169.78L530.27 154.4c19.18-21.74 18.15-54.63-2.35-75.13z"></path></svg>
   </button>
 `;
 
-const highlightStyled = ({ display = "none", left = 0, top = 0 }) => `
-  #highlightingButton {
+// Define the styles for the highlighter button
+const styled = ({ display = "none", left = 0, top = 0 }) => `
+  #mediumHighlighter {
     align-items: center;
     background-color: black;
     border-radius: 5px;
@@ -34,45 +38,52 @@ const highlightStyled = ({ display = "none", left = 0, top = 0 }) => `
   }
 `;
 
-class HighlighterClass extends HTMLElement {
+// Define the custom element that represents the button and text highlighting functionality
+class MediumHighlighter extends HTMLElement {
   constructor() {
     super();
     this.render();
   }
-
+// Get the marker position from the element's attributes
   get markerPosition() {
     return JSON.parse(this.getAttribute("markerPosition") || "{}");
   }
 
+  // Get the style element in the shadow root
   get styleElement() {
     return this.shadowRoot.querySelector("style");
   }
 
+   // Get the highlight template in the shadow root
   get highlightTemplate() {
     return this.shadowRoot.getElementById("highlightTemplate");
   }
 
+  // Specify the observed attributes for this custom element
   static get observedAttributes() {
     return ["markerPosition"];
   }
 
+  // Render the button and add the click event listener
   render() {
     this.attachShadow({ mode: "open" });
     const style = document.createElement("style");
-    style.textContent = highlightStyled({});
+    style.textContent = styled({});
     this.shadowRoot.appendChild(style);
-    this.shadowRoot.innerHTML += highlightTemplate;
+    this.shadowRoot.innerHTML += template;
     this.shadowRoot
-      .getElementById("highlightingButton")
+      .getElementById("mediumHighlighter")
       .addEventListener("click", () => this.highlightSelection());
   }
 
+  // Update the marker position when the attribute changes
   attributeChangedCallback(name, oldValue, newValue) {
     if (name === "markerPosition") {
-      this.styleElement.textContent = highlightStyled(this.markerPosition);
+      this.styleElement.textContent = styled(this.markerPosition);
     }
   }
 
+  // Highlight the selected text
   highlightSelection() {
     var userSelection = window.getSelection();
     for (let i = 0; i < userSelection.rangeCount; i++) {
@@ -81,6 +92,7 @@ class HighlighterClass extends HTMLElement {
     window.getSelection().empty();
   }
 
+  // Highlight the range of text
   highlightRange(range) {
     const clone =
       this.highlightTemplate.cloneNode(true).content.firstElementChild;
@@ -89,4 +101,4 @@ class HighlighterClass extends HTMLElement {
   }
 }
 
-window.customElements.define("stickit-highlighter", HighlighterClass);
+window.customElements.define("medium-highlighter", MediumHighlighter);
