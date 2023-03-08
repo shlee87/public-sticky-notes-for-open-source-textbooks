@@ -58,6 +58,21 @@
   .u-section-1 .u-btn-2 {
     width: 100px;
     padding: 10px 12px;
-    display: inline-block;
+  }
+
+  .flex-container {
+      display: flex;
+  }
+
+  .flex-child {
+      flex: 1;   
+  }
+
+  .loginButton {
+      margin-left: auto;
+  }
+
+  .signupButton {
+      margin-right: auto;
   }
 }
