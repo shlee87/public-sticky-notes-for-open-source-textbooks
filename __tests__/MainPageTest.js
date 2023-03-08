@@ -25,9 +25,20 @@ describe(
             // Get the extension id if needed
             const extensionId = await getExtensionId(browser);
 
-            // Navigate to the page needed
-            // Currently navigates to the extension page, but can be changed to any url
-            await page.goto(`chrome-extension://${extensionId}/Main-Page.html`);
+            // Logout if Necessary
+            try {
+                await page.goto(`chrome-extension://${extensionId}/Options-Page.html`);
+                await page.click('#logout-button');
+            }
+            catch (e) { };
+
+            // Log in
+            await page.goto(`chrome-extension://${extensionId}/Login-Page.html`);
+            await page.bringToFront();
+            await page.type('#username-input', 'admin');
+            await page.type('#password-input', 'Stickit1!');
+            await page.click('#LoginButton');
+
 
             // Focuses the page
             await page.bringToFront();
@@ -48,9 +59,20 @@ describe(
             // Get the extension id if needed
             const extensionId = await getExtensionId(browser);
 
-            // Navigate to the page needed
-            // Currently navigates to the extension page, but can be changed to any url
-            await page.goto(`chrome-extension://${extensionId}/Main-Page.html`);
+            // Logout if Necessary
+            try {
+                await page.goto(`chrome-extension://${extensionId}/Options-Page.html`);
+                await page.click('#logout-button');
+            }
+            catch (e) { };
+
+
+            // Log in
+            await page.goto(`chrome-extension://${extensionId}/Login-Page.html`);
+            await page.bringToFront();
+            await page.type('#username-input', 'admin');
+            await page.type('#password-input', 'Stickit1!');
+            await page.click('#LoginButton');
 
             // Focuses the page
             await page.bringToFront();
@@ -71,9 +93,19 @@ describe(
             // Get the extension id if needed
             const extensionId = await getExtensionId(browser);
 
-            // Navigate to the page needed
-            // Currently navigates to the extension page, but can be changed to any url
-            await page.goto(`chrome-extension://${extensionId}/Main-Page.html`);
+            // Logout if Necessary
+            try {
+                await page.goto(`chrome-extension://${extensionId}/Options-Page.html`);
+                await page.click('#logout-button');
+            }
+            catch (e) { };
+
+            // Log in
+            await page.goto(`chrome-extension://${extensionId}/Login-Page.html`);
+            await page.bringToFront();
+            await page.type('#username-input', 'admin');
+            await page.type('#password-input', 'Stickit1!');
+            await page.click('#LoginButton');
 
             // Focuses the page
             await page.bringToFront();
@@ -94,6 +126,20 @@ describe(
             // Get the extension id if needed
             const extensionId = await getExtensionId(browser);
 
+            // Logout if Necessary
+            try {
+                await page.goto(`chrome-extension://${extensionId}/Options-Page.html`);
+                await page.click('#logout-button');
+            }
+            catch (e) { };
+
+            // Log in
+            await page.goto(`chrome-extension://${extensionId}/Login-Page.html`);
+            await page.bringToFront();
+            await page.type('#username-input', 'admin');
+            await page.type('#password-input', 'Stickit1!');
+            await page.click('#LoginButton');
+
             // Navigate to the page needed
             // Currently navigates to the extension page, but can be changed to any url
             await page.goto(`chrome-extension://${extensionId}/Options-Page.html`);
@@ -102,8 +148,8 @@ describe(
             await page.bringToFront();
 
             // Click Options button, read text
-            await page.waitForSelector("#LogoutButton");
-            await page.click("#LogoutButton");
+            await page.waitForSelector("#logout-button");
+            await page.click("#logout-button");
 
             const url = page.url();
 

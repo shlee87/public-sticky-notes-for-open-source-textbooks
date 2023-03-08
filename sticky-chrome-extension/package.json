@@ -1,15 +1,16 @@
 {
-  "name": "medium-highlighter",
-  "version": "1.0.0",
-  "description": "",
-  "main": "medium-highlighter.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "Marius Bongarts",
-  "license": "ISC",
   "dependencies": {
     "@webcomponents/custom-elements": "^1.4.3"
+  },
+  "devDependencies": {
+    "@babel/core": "7.21.0",
+    "@babel/preset-env": "7.20.2",
+    "babel-loader": "^8.2.3",
+    "webpack": "5.75.0",
+    "webpack-cli": "5.0.1"
+  },
+  "scripts": {
+    "build": "webpack --mode production",
+    "watch": "webpack --watch"
   }
 }

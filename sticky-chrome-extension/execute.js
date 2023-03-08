@@ -1,5 +1,4 @@
 // this code will be executed when the extension's button is clicked
-(function() {
-  console.log('execute.js executed');
-})();
-//hello
+import { Amplify, Auth } from 'aws-amplify';
+import awsconfig from './aws-exports';
+Amplify.configure(awsconfig);
