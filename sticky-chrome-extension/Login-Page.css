@@ -56,7 +56,8 @@
   }
 
   .u-section-1 .u-btn-2 {
-    width: 100%;
+    width: 100px;
     padding: 10px 12px;
+    display: inline-block;
   }
 }
