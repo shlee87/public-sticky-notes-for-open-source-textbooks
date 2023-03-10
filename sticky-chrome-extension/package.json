@@ -1,6 +1,7 @@
 {
   "dependencies": {
-    "@webcomponents/custom-elements": "^1.4.3"
+    "@webcomponents/custom-elements": "^1.4.3",
+    "aws-amplify": "^5.0.18"
   },
   "devDependencies": {
     "@babel/core": "7.21.0",

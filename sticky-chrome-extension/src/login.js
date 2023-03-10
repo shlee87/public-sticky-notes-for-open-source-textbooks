@@ -60,6 +60,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const errorMessage = document.getElementById('error-message');
     const logoutButton = document.getElementById('logout-button');
     const signInForm = document.getElementById('sign-in-form');
+    const signUpForm = document.getElementById('sign-up-form');
+    const confirmForm = document.getElementById('confirm-email-form');
     if (signInForm) {
         signInForm.addEventListener('submit', function (event) {
             event.preventDefault();
@@ -73,6 +75,38 @@ document.addEventListener('DOMContentLoaded', function () {
                 .catch(error => {
                     errorMessage.style.display = 'block';
                 });
+        });
+    }
+    else if (signUpForm) {
+        signUpForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            const username = document.getElementById('username-input').value;
+            const email = document.getElementById('email-input').value;
+            const password = document.getElementById('password-input').value;
+            const con_password = document.getElementById('con-password-input').value;
+
+            if (password !== con_password) {
+                errorMessage.style.display = 'block';
+            }
+            else {
+                Auth.signUp({ username, password, attributes: { email }, autoSignIn: { enabled: true } })
+                    .then(user => {
+                        console.log('Successfully signed up:', user);
+                        window.location.href = '/Confirm-Email.html';
+                    })
+                    .catch(error => {
+                        errorMessage.style.display = 'block';
+                    });
+            }
+        });
+    }
+    // Confirm Form If statement (Will probably change to a function to call inside signup form statement)
+    // Need to make Cleaner
+    else if (confirmForm) {
+        confirmForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            const confirmCode = document.getElementById('confirm-code-input').value;
+
         });
     }
     else if (logoutButton) {
