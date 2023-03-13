@@ -7,7 +7,7 @@ const commentTemplate = `
     <span class="comment" style="background-color: ${commentColor}; display: inline"></span>
   </template>
 
-  <button id="commentingButton">
+  <button id="commentingButton" class="btn btn-success" >
   <svg class="text-marker" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
   <path d="M443.26 0H68.74C30.86 0 0 30.86 0 68.74v374.52C0 481.14 30.86 512 68.74 512h374.52c37.88 0 68.74-30.86 68.74-68.74V68.74C512 30.86 481.14 0 443.26 0zM256 464.74c-15.05 0-29.09-3.3-41.65-8.8L103.48 386.52c-22.69-11.71-27.32-38.53-10.07-55.78l65.49-65.49c9.95-9.95 26.11-9.95 36.06 0l57.69 57.69c9.95 9.95 26.11 9.95 36.06 0l80.1-80.1c9.95-9.95 26.11-9.95 36.06 0l57.69 57.69c9.95 9.95 9.95 26.11 0 36.06l-80.1 80.1c-13.61 13.61-35.69 13.61-49.3 0l-51.77-51.77-28.4 28.4 64.8 64.8c12.56 5.5 26.6 8.8 41.65 8.8 33.28 0 60.26-26.98 60.26-60.26S289.28 464.74 256 464.74z"/>
 </svg>
@@ -70,17 +70,10 @@ class CommenterClass extends HTMLElement {
       .getElementById("commentingButton")
       .addEventListener("click", () => 
       {
-        this.commentSelection();
-        
-        /*chrome.windows.create({
-            url: `chrome-extension://dikldfbbcbpjmkmglginiepmikckpnck/popup.html`,
-            type: "popup",
-            width: 400,
-            height: 600,
-            id: `dikldfbbcbpjmkmglginiepmikckpnck-popup`
-          });
-
-      */
+          this.commentSelection();
+          var noteURL = chrome.runtime.getURL("/AddNote.html");
+          var page = '<a href="' + noteURL + '" target="_blank">note</a>';
+          window.open(page);
         
       }
       );
