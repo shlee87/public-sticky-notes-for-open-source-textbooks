@@ -62,6 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const signInForm = document.getElementById('sign-in-form');
     const signUpForm = document.getElementById('sign-up-form');
     const confirmForm = document.getElementById('confirm-email-form');
+    const resendCode = document.getElementById('resend-code-button');
     if (signInForm) {
         signInForm.addEventListener('submit', function (event) {
             event.preventDefault();
@@ -73,7 +74,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     window.location.href = signInConfig.signInSuccessUrl;
                 })
                 .catch(error => {
-                    errorMessage.style.display = 'block';
+                    switch (error.code) {
+                        case 'UserNotConfirmedException':
+                            window.location.href = "/Confirm-Email.html?username=" + username;
+                        default:
+                            errorMessage.style.display = 'block';
+                    }
                 });
         });
     }
@@ -92,21 +98,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 Auth.signUp({ username, password, attributes: { email }, autoSignIn: { enabled: true } })
                     .then(user => {
                         console.log('Successfully signed up:', user);
-                        window.location.href = '/Confirm-Email.html';
+                        window.location.href = "/Confirm-Email.html?username=" + username;
                     })
                     .catch(error => {
                         errorMessage.style.display = 'block';
                     });
             }
-        });
-    }
-    // Confirm Form If statement (Will probably change to a function to call inside signup form statement)
-    // Need to make Cleaner
-    else if (confirmForm) {
-        confirmForm.addEventListener('submit', function (event) {
-            event.preventDefault();
-            const confirmCode = document.getElementById('confirm-code-input').value;
-
         });
     }
     else if (logoutButton) {
@@ -121,6 +118,33 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
         });
     }
+    else if (confirmForm) {
+        const resendCode = document.getElementById('resend-code-button');
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const username = urlParams.get('username');
+        resendCode.addEventListener('click', function (event) {
+            event.preventDefault();
+            Auth.resendSignUp(username)
+                .then(() => {
+                    console.log('code sent successfully');
+                })
+                .catch(error => {
+                    console.error('error resending code:', error);
+                });
+        });
+        confirmForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            const code = document.getElementById('confirm-code-input').value
+            Auth.confirmSignUp(username, code)
+                .then(() => {
+                    window.location.href = 'Main-Page.html';
+                })
+                .catch(error => {
+                    console.error('Error Confirming Email:', error);
+                });
+        });
+    }
     else {
         Auth.currentAuthenticatedUser()
             .then(user => {})
@@ -129,3 +153,4 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     }
 });
+
