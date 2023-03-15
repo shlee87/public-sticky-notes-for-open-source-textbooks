@@ -72,8 +72,7 @@ class CommenterClass extends HTMLElement {
       {
           this.commentSelection();
           var noteURL = chrome.runtime.getURL("/AddNote.html");
-          var page = '<a href="' + noteURL + '" target="_blank">note</a>';
-          window.open(page);
+          window.open(noteURL,'_blank');
         
       }
       );

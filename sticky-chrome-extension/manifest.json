@@ -5,9 +5,13 @@
   "manifest_version": 3,
   "web_accessible_resources": [
     {
+      "content_security_policy": {
+        "extension_pages": "default-src 'self'; object-src 'self'"
+      },
       "resources": [
         "aws-amplify/**",
-        "@aws-amplify/auth/**"
+        "@aws-amplify/auth/**",
+          "*.html"
       ],
       "matches": [
         "<all_urls>"
