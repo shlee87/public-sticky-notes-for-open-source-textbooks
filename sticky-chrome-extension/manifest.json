@@ -9,9 +9,10 @@
         "extension_pages": "default-src 'self'; object-src 'self'"
       },
       "resources": [
+        "dist/note.js",
         "aws-amplify/**",
         "@aws-amplify/auth/**",
-          "*.html"
+        "*.html"
       ],
       "matches": [
         "<all_urls>"
@@ -31,7 +32,10 @@
   "content_scripts": [
     {
       "matches": [ "<all_urls>" ],
-      "js": [ "dist/bundle.js" ]
+      "js": [
+        "dist/login.js",
+        "dist/note.js"
+      ]
     },
     {
       "run_at": "document_start",
