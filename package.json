@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "aws-sdk": "^2.1334.0",
     "jest": "29.4.1",
     "puppeteer": "19.6.3"
   },
