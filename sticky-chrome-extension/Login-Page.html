@@ -29,9 +29,6 @@
         <div class="u-clearfix u-sheet u-sheet-1">
             <h1 class="u-align-center-xs u-text u-text-custom-color-5 u-text-default-xs u-text-1">StickIT Login&nbsp;</h1>
             <div class="u-expanded-width-xs u-form u-login-control u-form-1">
-                <div id="error-message" style="display: none; color: red;">
-                    Incorrect email or password.
-                </div>
                 <form id="sign-in-form" class="u-clearfix u-form-custom-backend u-form-spacing-10 u-form-vertical u-inner-form flex-container" source="custom" name="form" style="padding: 10px;" redirect="true">
                     <div class="u-form-group u-form-name u-label-top">
                         <label for="username-input" class="u-label u-text-custom-color-5">Username</label>
@@ -41,6 +38,9 @@
                         <label for="password-input" class="u-label u-text-custom-color-5">Password</label>
                         <input type="password" placeholder="Enter your Password" id="password-input" name="password" class="u-border-grey-30 u-input u-input-rectangle u-input-2" required="">
                         <a href="Forgot-Page.html" class="forgotPass">Forgot Password</a>
+                    </div>
+                    <div id="error-message" class="u-form-group errorMessage" style="display: none; color: red;">
+                        Incorrect email or password.
                     </div>
                     <div class="u-align-center u-form-group u-form-submit u-label-top flex-child">
                         <a href="#" id="LoginButton" class="loginButton u-border-none u-btn u-button-style u-custom-color-5 u-btn-2">Login</a>

@@ -62,7 +62,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const signInForm = document.getElementById('sign-in-form');
     const signUpForm = document.getElementById('sign-up-form');
     const confirmForm = document.getElementById('confirm-email-form');
-    const resendCode = document.getElementById('resend-code-button');
+    const forgotForm = document.getElementById('forgot-form');
+
+
     if (signInForm) {
         signInForm.addEventListener('submit', function (event) {
             event.preventDefault();
@@ -143,6 +145,44 @@ document.addEventListener('DOMContentLoaded', function () {
                 .catch(error => {
                     console.error('Error Confirming Email:', error);
                 });
+        });
+    }
+    else if (forgotForm) {
+        const resetForm = document.getElementById('reset-form');
+        forgotForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            const username = document.getElementById('username-input').value;
+            Auth.forgotPassword(username)
+                .then(() => {
+                    forgotForm.style.display = 'none';
+                    resetForm.style.display = 'block';
+                })
+                .catch(error => {
+                    console.error('Error Sending Forgot Password Code:', error);
+                });
+            resetForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+                const code = document.getElementById('code-input').value;
+                const password = document.getElementById('password-input').value;
+                const conPassword = document.getElementById('con-password-input').value;
+                if (password != conPassword) {
+                    console.log('passwords dont match');
+                    errorMessage.innerText = "Passwords Dont Match";
+                    errorMessage.style.display = 'block';
+                }
+                else {
+                    Auth.forgotPasswordSubmit(username, code, password)
+                        .then(() => {
+                            console.log('Password is reset');
+                            window.location.href = 'Login-Page.html'
+                        })
+                        .catch(error => {
+                            console.log('Invalid Confirmation Code:', error);
+                            errorMessage.innerText = "Error Reseting Password";
+                            errorMessage.style.display = 'block';
+                        });
+                }
+            });
         });
     }
     else {
