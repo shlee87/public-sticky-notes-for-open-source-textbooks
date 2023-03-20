@@ -1,6 +1,4 @@
-const script = document.createElement("script");
-script.src = chrome.runtime.getURL("dist/note.js");
-document.head.appendChild(script);
+import { insertPara } from './src/note.js';
 
 const commentColor = "rgb(255, 0, 0)";
 
@@ -40,7 +38,6 @@ const styled = ({ display = "none", left = 0, top = 0 }) => `
   }
 `;
 
-script.onload = () => {
 class CommenterClass extends HTMLElement {
     constructor() {
         super();
@@ -104,7 +101,22 @@ class CommenterClass extends HTMLElement {
 
     commentRange(range) {
         const paragraph = range.commonAncestorContainer.parentNode.closest('p');
-        insertPara(paragraph);
+        //insertPara(paragraph);
+        const noteUrl = chrome.runtime.getURL('AddNote.html');
+        console.log(noteUrl);
+        window.open(noteUrl, '_blank');
+        console.log("Outside");
+
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log("Inside");
+            const doc = document.getElementById('textLocation');
+            console.log(doc);
+            doc.innerHTML = paragraph;
+        });
+
+        console.log("After");
+
+
         const clone =
             this.commentTemplate.cloneNode(true).content.firstElementChild;
         clone.appendChild(range.extractContents());
