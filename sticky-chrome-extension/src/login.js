@@ -1,4 +1,4 @@
-import { Amplify, Auth } from 'aws-amplify';
+import { Amplify, Auth, API } from 'aws-amplify';
 
 // Configure Amplify with your Auth settings
 Amplify.configure({
@@ -41,7 +41,6 @@ Auth.configure({
     }
 });
 
-
 // Define the sign-in configuration options
 const signInConfig = {
     header: 'Sign In',
@@ -57,13 +56,16 @@ document.addEventListener('DOMContentLoaded', function () {
         authenticationFlowType: 'USER_SRP_AUTH'
     });
 
+    fetch('https://42hpzstb3l6sxh74xdfdbvepxi0sdpyz.lambda-url.us-east-2.on.aws/')
+        .then((response) => response.json())
+        .then((data) => console.log(data));
+
     const errorMessage = document.getElementById('error-message');
     const logoutButton = document.getElementById('logout-button');
     const signInForm = document.getElementById('sign-in-form');
     const signUpForm = document.getElementById('sign-up-form');
     const confirmForm = document.getElementById('confirm-email-form');
     const forgotForm = document.getElementById('forgot-form');
-
 
     if (signInForm) {
         signInForm.addEventListener('submit', function (event) {
