@@ -56,10 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
         authenticationFlowType: 'USER_SRP_AUTH'
     });
 
-    Auth.currentUserInfo().then((user) => {
-        const userId = user.id;
-
-    fetch(`https://42hpzstb3l6sxh74xdfdbvepxi0sdpyz.lambda-url.us-east-2.on.aws/?userID=${userId}`)
+    fetch('https://42hpzstb3l6sxh74xdfdbvepxi0sdpyz.lambda-url.us-east-2.on.aws/')
         .then((response) => response.json())
         .then((data) => console.log(data));
 
