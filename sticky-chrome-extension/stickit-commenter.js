@@ -104,7 +104,7 @@ class CommenterClass extends HTMLElement {
         //insertPara(paragraph);
         const noteUrl = chrome.runtime.getURL('AddNote.html');
         console.log(noteUrl);
-        window.open(noteUrl, '_blank');
+        window.open(noteUrl, '_blank', "width = 100px", "height = 100px");
         console.log("Outside");
 
         document.addEventListener('DOMContentLoaded', function () {
