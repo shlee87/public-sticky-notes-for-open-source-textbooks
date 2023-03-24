@@ -68,12 +68,11 @@
         flex: 1;
     }
 
-    .signUpButton {
+    .confirmButton {
         margin-left: auto;
     }
 
-    .backButton {
+    .resendButton {
         margin-right: auto;
     }
-
 }

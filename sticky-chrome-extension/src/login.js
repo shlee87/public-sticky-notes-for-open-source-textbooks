@@ -1,4 +1,4 @@
-import { Amplify, Auth } from 'aws-amplify';
+import { Amplify, Auth, API } from 'aws-amplify';
 
 // Configure Amplify with your Auth settings
 Amplify.configure({
@@ -41,7 +41,6 @@ Auth.configure({
     }
 });
 
-
 // Define the sign-in configuration options
 const signInConfig = {
     header: 'Sign In',
@@ -57,9 +56,17 @@ document.addEventListener('DOMContentLoaded', function () {
         authenticationFlowType: 'USER_SRP_AUTH'
     });
 
+    fetch('https://42hpzstb3l6sxh74xdfdbvepxi0sdpyz.lambda-url.us-east-2.on.aws/')
+        .then((response) => response.json())
+        .then((data) => console.log(data));
+
     const errorMessage = document.getElementById('error-message');
     const logoutButton = document.getElementById('logout-button');
     const signInForm = document.getElementById('sign-in-form');
+    const signUpForm = document.getElementById('sign-up-form');
+    const confirmForm = document.getElementById('confirm-email-form');
+    const forgotForm = document.getElementById('forgot-form');
+
     if (signInForm) {
         signInForm.addEventListener('submit', function (event) {
             event.preventDefault();
@@ -71,8 +78,36 @@ document.addEventListener('DOMContentLoaded', function () {
                     window.location.href = signInConfig.signInSuccessUrl;
                 })
                 .catch(error => {
-                    errorMessage.style.display = 'block';
+                    switch (error.code) {
+                        case 'UserNotConfirmedException':
+                            window.location.href = "/Confirm-Email.html?username=" + username;
+                        default:
+                            errorMessage.style.display = 'block';
+                    }
                 });
+        });
+    }
+    else if (signUpForm) {
+        signUpForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            const username = document.getElementById('username-input').value;
+            const email = document.getElementById('email-input').value;
+            const password = document.getElementById('password-input').value;
+            const con_password = document.getElementById('con-password-input').value;
+
+            if (password !== con_password) {
+                errorMessage.style.display = 'block';
+            }
+            else {
+                Auth.signUp({ username, password, attributes: { email }, autoSignIn: { enabled: true } })
+                    .then(user => {
+                        console.log('Successfully signed up:', user);
+                        window.location.href = "/Confirm-Email.html?username=" + username;
+                    })
+                    .catch(error => {
+                        errorMessage.style.display = 'block';
+                    });
+            }
         });
     }
     else if (logoutButton) {
@@ -87,6 +122,71 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
         });
     }
+    else if (confirmForm) {
+        const resendCode = document.getElementById('resend-code-button');
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const username = urlParams.get('username');
+        resendCode.addEventListener('click', function (event) {
+            event.preventDefault();
+            Auth.resendSignUp(username)
+                .then(() => {
+                    console.log('code sent successfully');
+                })
+                .catch(error => {
+                    console.error('error resending code:', error);
+                });
+        });
+        confirmForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            const code = document.getElementById('confirm-code-input').value
+            Auth.confirmSignUp(username, code)
+                .then(() => {
+                    window.location.href = 'Main-Page.html';
+                })
+                .catch(error => {
+                    console.error('Error Confirming Email:', error);
+                });
+        });
+    }
+    else if (forgotForm) {
+        const resetForm = document.getElementById('reset-form');
+        forgotForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            const username = document.getElementById('username-input').value;
+            Auth.forgotPassword(username)
+                .then(() => {
+                    forgotForm.style.display = 'none';
+                    resetForm.style.display = 'block';
+                })
+                .catch(error => {
+                    console.error('Error Sending Forgot Password Code:', error);
+                });
+            resetForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+                const code = document.getElementById('code-input').value;
+                const password = document.getElementById('password-input').value;
+                const conPassword = document.getElementById('con-password-input').value;
+                if (password != conPassword) {
+                    console.log('passwords dont match');
+                    errorMessage.innerText = "Passwords Dont Match";
+                    errorMessage.style.display = 'block';
+                }
+                else {
+                    Auth.forgotPasswordSubmit(username, code, password)
+                        .then(() => {
+                            console.log('Password is reset');
+                            window.location.href = 'Login-Page.html'
+                        })
+                        .catch(error => {
+                            console.log('Invalid Confirmation Code:', error);
+                            errorMessage.innerText = "Error Reseting Password";
+                            errorMessage.style.display = 'block';
+                        });
+                }
+            });
+        });
+    }
     else {
         Auth.currentAuthenticatedUser()
             .then(user => {})
@@ -95,3 +195,4 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     }
 });
+

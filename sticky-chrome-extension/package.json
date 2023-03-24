@@ -1,12 +1,14 @@
 {
   "dependencies": {
-    "@webcomponents/custom-elements": "^1.4.3"
+    "@webcomponents/custom-elements": "^1.4.3",
+    "aws-amplify": "^5.0.21",
+    "node-fetch": "3.3.1"
   },
   "devDependencies": {
     "@babel/core": "7.21.0",
     "@babel/preset-env": "7.20.2",
     "babel-loader": "^8.2.3",
-    "webpack": "5.75.0",
+    "webpack": "5.76.3",
     "webpack-cli": "5.0.1"
   },
   "scripts": {
