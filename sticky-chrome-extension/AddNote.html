@@ -19,6 +19,16 @@
 		"@type": "Organization",
 		"name": "Site1"
 }</script>
+    <script>
+        chrome.runtime.onMessage.addListener(
+            function (request, sender) {
+                console.log(sender.tab ?
+                    "from a content script:" + sender.tab.url :
+                    "from the extension");
+            }
+        );
+        document.getElementById("paragraph").innerHTML = paragraph;
+    </script>
     <meta name="theme-color" content="#478ac9">
     <meta property="og:title" content="AddNote">
     <meta property="og:type" content="website">

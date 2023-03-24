@@ -101,6 +101,7 @@ class CommenterClass extends HTMLElement {
 
     commentRange(range) {
         const paragraph = range.commonAncestorContainer.parentNode.closest('p');
+        chrome.runtime.sendMessage({ data: paragraph });
         //insertPara(paragraph);
         const noteUrl = chrome.runtime.getURL('AddNote.html');
         console.log(noteUrl);
