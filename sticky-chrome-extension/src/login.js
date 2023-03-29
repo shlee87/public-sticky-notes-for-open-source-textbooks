@@ -56,10 +56,6 @@ document.addEventListener('DOMContentLoaded', function () {
         authenticationFlowType: 'USER_SRP_AUTH'
     });
 
-    fetch('https://42hpzstb3l6sxh74xdfdbvepxi0sdpyz.lambda-url.us-east-2.on.aws/')
-        .then((response) => response.json())
-        .then((data) => console.log(data));
-
     const errorMessage = document.getElementById('error-message');
     const logoutButton = document.getElementById('logout-button');
     const signInForm = document.getElementById('sign-in-form');
@@ -76,6 +72,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 .then(user => {
                     console.log('Successfully signed in:', user);
                     window.location.href = signInConfig.signInSuccessUrl;
+                    Auth.currentAuthenticatedUser()
+                        .then((user) => {
+                            const userId = user.attributes.sub;
+                            const lambdaUrl = 'https://42hpzstb3l6sxh74xdfdbvepxi0sdpyz.lambda-url.us-east-2.on.aws';
+                            const url = `${lambdaUrl}/?userId=${encodeURIComponent(userId)}`;
+                            fetch(url)
+                                .then((response) => response.json())
+                                .then((data) => console.log(data));
+                        })
+                        .catch((error) => console.log(error));
                 })
                 .catch(error => {
                     switch (error.code) {
