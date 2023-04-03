@@ -70,17 +70,6 @@ class CommenterClass extends HTMLElement {
             .getElementById("commentingButton")
             .addEventListener("click", () => {
                 this.commentSelection();
-
-                /*chrome.windows.create({
-                    url: `chrome-extension://dikldfbbcbpjmkmglginiepmikckpnck/popup.html`,
-                    type: "popup",
-                    width: 400,
-                    height: 600,
-                    id: `dikldfbbcbpjmkmglginiepmikckpnck-popup`
-                  });
-        
-              */
-
             }
             );
     }
