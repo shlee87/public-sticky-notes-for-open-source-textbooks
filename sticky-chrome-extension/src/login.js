@@ -49,6 +49,17 @@ const signInConfig = {
     signInSuccessUrl: '/Main-Page.html',
 };
 
+Auth.currentAuthenticatedUser()
+    .then((user) => {
+        const userId = user.attributes.sub;
+        //const userId = '3b7af2ec-0615-44f6-887d-20d77f4a4173';
+        const lambdaUrl = 'https://5a6dwifl33kakbasgv6izm3sda0gpygw.lambda-url.us-east-1.on.aws';
+        const url = `${lambdaUrl}/?userId=${encodeURIComponent(userId)}`;
+        fetch(url)
+            .then(response => response.json())
+            .then(data => console.log(data[0].username));
+    })
+    .catch((error) => console.log(error));
 
 // Render the authentication UI
 document.addEventListener('DOMContentLoaded', function () {
@@ -72,16 +83,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 .then(user => {
                     console.log('Successfully signed in:', user);
                     window.location.href = signInConfig.signInSuccessUrl;
-                    Auth.currentAuthenticatedUser()
-                        .then((user) => {
-                            const userId = user.attributes.sub;
-                            const lambdaUrl = 'https://42hpzstb3l6sxh74xdfdbvepxi0sdpyz.lambda-url.us-east-2.on.aws';
-                            const url = `${lambdaUrl}/?userId=${encodeURIComponent(userId)}`;
-                            fetch(url)
-                                .then((response) => response.json())
-                                .then((data) => console.log(data));
-                        })
-                        .catch((error) => console.log(error));
                 })
                 .catch(error => {
                     switch (error.code) {
