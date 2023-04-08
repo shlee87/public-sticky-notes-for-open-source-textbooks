@@ -1,6 +1,7 @@
 import { insertPara } from './src/note.js';
 
 const commentColor = "rgb(255, 0, 0)";
+var data;
 
 const commentTemplate = `
   <template id="commentTemplate">
@@ -93,8 +94,10 @@ class CommenterClass extends HTMLElement {
         chrome.runtime.sendMessage({ data: paragraph });
         //insertPara(paragraph);
         const noteUrl = chrome.runtime.getURL('AddNote.html');
+        data = chrome.runtime.getURL();
         console.log(noteUrl);
         window.open(noteUrl, '_blank');
+        localStorage.setItem('url', data);
         console.log("Outside");
 
         document.addEventListener('DOMContentLoaded', function () {
