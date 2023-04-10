@@ -1,7 +1,7 @@
 import { insertPara } from './src/note.js';
 
 const commentColor = "rgb(255, 0, 0)";
-var data;
+var url;
 
 const commentTemplate = `
   <template id="commentTemplate">
@@ -49,6 +49,7 @@ class CommenterClass extends HTMLElement {
         return JSON.parse(this.getAttribute("markerPosition") || "{}");
     }
 
+
     get styleElement() {
         return this.shadowRoot.querySelector("style");
     }
@@ -93,11 +94,10 @@ class CommenterClass extends HTMLElement {
         const paragraph = range.commonAncestorContainer.parentNode.closest('p');
         chrome.runtime.sendMessage({ data: paragraph });
         //insertPara(paragraph);
+        url = tab[0].url;
         const noteUrl = chrome.runtime.getURL('AddNote.html');
-        data = chrome.runtime.getURL();
         console.log(noteUrl);
         window.open(noteUrl, '_blank');
-        localStorage.setItem('url', data);
         console.log("Outside");
 
         document.addEventListener('DOMContentLoaded', function () {
