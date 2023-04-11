@@ -95,7 +95,7 @@ class CommenterClass extends HTMLElement {
         chrome.runtime.sendMessage({ data: paragraph });
         //insertPara(paragraph);
         url = tab[0].url;
-        const noteUrl = chrome.runtime.getURL('AddNote.html');
+        const noteUrl = chrome.runtime.getURL('AddNote.html') + "/?" + url;
         console.log(noteUrl);
         window.open(noteUrl, '_blank');
         console.log("Outside");
