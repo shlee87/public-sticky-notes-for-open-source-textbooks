@@ -2,7 +2,8 @@ const path = require('path');
 
 module.exports = {
     entry: {
-        login: './src/login.js'
+        login: './src/login.js',
+        note: './src/note.js'
     },
     output: {
         filename: '[name].js',

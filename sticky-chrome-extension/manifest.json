@@ -9,6 +9,8 @@
         "extension_pages": "default-src 'self'; object-src 'self'"
       },
       "resources": [
+        "dist/note.js",
+        "AddNote.html",
         "aws-amplify/**",
         "@aws-amplify/auth/**",
         "*.html"
@@ -29,12 +31,6 @@
     "default_popup": "Main-Page.html"
   },
   "content_scripts": [
-    {
-      "matches": [ "<all_urls>" ],
-      "js": [
-        "dist/login.js"
-      ]
-    },
     {
       "run_at": "document_start",
       "js": [

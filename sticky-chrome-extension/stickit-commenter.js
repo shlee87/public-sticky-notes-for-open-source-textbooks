@@ -91,18 +91,27 @@ class CommenterClass extends HTMLElement {
     commentRange(range) {
         const pageUrl = window.location.href;
         console.log(pageUrl);
-        const noteUrl = `${chrome.runtime.getURL('AddNote.html')}/?url=${encodeURIComponent(pageUrl)}`
+        const noteUrl = `${chrome.runtime.getURL('AddNote.html')}?url=${encodeURIComponent(pageUrl)}`
+        //const noteUrl = chrome.runtime.getURL('AddNote.html');
         console.log(noteUrl);
         window.open(noteUrl, '_blank');
 
-        document.addEventListener('DOMContentLoaded', function () {
-            console.log("Inside");
-            const doc = document.getElementById('textLocation');
-            console.log(doc);
-            doc.innerHTML = paragraph;
-        });
+        //chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+        //    const currentUrl = tabs[0].url;
+        //    console.log(currentUrl);
+        //    const newUrl = chrome.runtime.getURL(`AddNote.html?url=${encodeURIComponent(currentUrl)}`);
+        //    console.log(newUrl);
+        //    chrome.tabs.create({ url: newUrl });
+        //});
 
-        console.log("After");
+        //document.addEventListener('DOMContentLoaded', function () {
+        //    console.log("Inside");
+        //    const doc = document.getElementById('textLocation');
+        //    console.log(doc);
+        //    doc.innerHTML = paragraph;
+        //});
+
+        //console.log("After");
 
 
         const clone =
