@@ -49,23 +49,23 @@ const signInConfig = {
     signInSuccessUrl: '/Main-Page.html',
 };
 
-/******************************************Database Connection************************************************ */
-// Method for querying the database for the current users username based on their id
-Auth.currentAuthenticatedUser()
-    .then((user) => {
-        const userId = user.attributes.sub;
-        // Method for calling the lambda fuction through the url
-        const lambdaUrl = 'https://5a6dwifl33kakbasgv6izm3sda0gpygw.lambda-url.us-east-1.on.aws';
-        // Method for passing over variables to the lambda function
-        const url = `${lambdaUrl}/?userId=${encodeURIComponent(userId)}`;
-        // call the function and get the response through the data output
-        fetch(url)
-            .then(response => response.json())
-            .then(data => console.log(data[0].username));
-    })
-    // Catch any errors
-    .catch((error) => console.log(error));
-/******************************************Database Connection************************************************ */
+///******************************************Database Connection************************************************ */
+//// Method for querying the database for the current users username based on their id
+//Auth.currentAuthenticatedUser()
+//    .then((user) => {
+//        const userId = user.attributes.sub;
+//        // Method for calling the lambda fuction through the url
+//        const lambdaUrl = 'https://5a6dwifl33kakbasgv6izm3sda0gpygw.lambda-url.us-east-1.on.aws';
+//        // Method for passing over variables to the lambda function
+//        const url = `${lambdaUrl}/?userId=${encodeURIComponent(userId)}`;
+//        // call the function and get the response through the data output
+//        fetch(url)
+//            .then(response => response.json())
+//            .then(data => console.log(data[0].username));
+//    })
+//    // Catch any errors
+//    .catch((error) => console.log(error));
+///******************************************Database Connection************************************************ */
 
 
 // Render the authentication UI

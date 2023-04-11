@@ -1,4 +1,5 @@
 const commentColor = "rgb(255, 0, 0)";
+var url;
 
 const commentTemplate = `
   <template id="commentTemplate">
@@ -37,76 +38,78 @@ const styled = ({ display = "none", left = 0, top = 0 }) => `
 `;
 
 class CommenterClass extends HTMLElement {
-  constructor() {
-    super();
-    this.render();
-  }
-
-  get markerPosition() {
-    return JSON.parse(this.getAttribute("markerPosition") || "{}");
-  }
-
-  get styleElement() {
-    return this.shadowRoot.querySelector("style");
-  }
-
-  get commentTemplate() {
-    return this.shadowRoot.getElementById("commentTemplate");
-  }
-
-  static get observedAttributes() {
-    return ["markerPosition"];
-  }
-
-  render() {
-    this.attachShadow({ mode: "open" });
-    const style = document.createElement("style");
-    style.textContent = styled({});
-    this.shadowRoot.appendChild(style);
-    this.shadowRoot.innerHTML += commentTemplate;
-    this.shadowRoot
-      .getElementById("commentingButton")
-      .addEventListener("click", () => 
-      {
-        this.commentSelection();
-        
-        /*chrome.windows.create({
-            url: `chrome-extension://dikldfbbcbpjmkmglginiepmikckpnck/popup.html`,
-            type: "popup",
-            width: 400,
-            height: 600,
-            id: `dikldfbbcbpjmkmglginiepmikckpnck-popup`
-          });
-
-      */
-        
-      }
-      );
-  }
-
-  attributeChangedCallback(name, oldValue, newValue) {
-    if (name === "markerPosition") {
-      this.styleElement.textContent = styled(this.markerPosition);
+    constructor() {
+        super();
+        this.render();
     }
-  }
 
-  commentSelection() {
-    var userSelection = window.getSelection();
-    for (let i = 0; i < userSelection.rangeCount; i++) {
-      this.commentRange(userSelection.getRangeAt(i));
-
-
-
+    get markerPosition() {
+        return JSON.parse(this.getAttribute("markerPosition") || "{}");
     }
-    window.getSelection().empty();
-  }
 
-  commentRange(range) {
-    const clone =
-      this.commentTemplate.cloneNode(true).content.firstElementChild;
-    clone.appendChild(range.extractContents());
-    range.insertNode(clone);
-  }
+
+    get styleElement() {
+        return this.shadowRoot.querySelector("style");
+    }
+
+    get commentTemplate() {
+        return this.shadowRoot.getElementById("commentTemplate");
+    }
+
+    static get observedAttributes() {
+        return ["markerPosition"];
+    }
+
+    render() {
+        this.attachShadow({ mode: "open" });
+        const style = document.createElement("style");
+        style.textContent = styled({});
+        this.shadowRoot.appendChild(style);
+        this.shadowRoot.innerHTML += commentTemplate;
+        this.shadowRoot
+            .getElementById("commentingButton")
+            .addEventListener("click", () => {
+                this.commentSelection();
+            }
+            );
+    }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+        if (name === "markerPosition") {
+            this.styleElement.textContent = styled(this.markerPosition);
+        }
+    }
+
+    commentSelection() {
+        var userSelection = window.getSelection();
+        for (let i = 0; i < userSelection.rangeCount; i++) {
+            this.commentRange(userSelection.getRangeAt(i));
+        }
+        window.getSelection().empty();
+    }
+
+    commentRange(range) {
+        const pageUrl = window.location.href;
+        console.log(pageUrl);
+        const noteUrl = `${chrome.runtime.getURL('AddNote.html')}/?url=${encodeURIComponent(pageUrl)}`
+        console.log(noteUrl);
+        window.open(noteUrl, '_blank');
+
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log("Inside");
+            const doc = document.getElementById('textLocation');
+            console.log(doc);
+            doc.innerHTML = paragraph;
+        });
+
+        console.log("After");
+
+
+        const clone =
+            this.commentTemplate.cloneNode(true).content.firstElementChild;
+        clone.appendChild(range.extractContents());
+        range.insertNode(clone);
+    }
 }
 
 window.customElements.define("stickit-commenter", CommenterClass);
