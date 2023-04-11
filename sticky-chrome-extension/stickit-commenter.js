@@ -1,5 +1,3 @@
-
-
 const commentColor = "rgb(255, 0, 0)";
 
 const commentTemplate = `
