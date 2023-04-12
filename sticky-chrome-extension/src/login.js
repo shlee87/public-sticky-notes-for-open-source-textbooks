@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
     if (searchForm){
         function displayResults(results) {
-            const resultsContainer = document.querySelector("#results");
+            const resultsContainer = document.querySelector("#sec-ce6e");
             resultsContainer.innerHTML = "";
           
             if (!results || !('length' in results) || results.length === 0) {
@@ -234,7 +234,7 @@ document.addEventListener('DOMContentLoaded', function () {
             try {
               const user = await Auth.currentAuthenticatedUser();
               const token = user.signInUserSession.idToken.jwtToken;
-              const apiGatewayUrl = "https://ge98klsa8e.execute-api.us-east-1.amazonaws.com/stickit_stage";
+              const apiGatewayUrl = "https://ge98klsa8e.execute-api.us-east-1.amazonaws.com/stickit_stage/search";
         
         //      const lambdaUrl = "https://uwumu5g5672s7kfcmspjpwukki0nnxez.lambda-url.us-east-1.on.aws/";
               const response = await fetch(apiGatewayUrl, {
@@ -245,15 +245,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 },
                 body: JSON.stringify({ keyword: searchTerm }),
               });
+            //   console.log("response",response)
         
         
               response.json().then((data) => {
              //   console.log("Parsed Lambda response:", data);
                // console.log("Search term:", searchTerm);
-                console.log("Parsed API Gateway response:", data);
+                console.log("Parsed API Gateway response:", data.body);
                 console.log("Lambda response:", data);
                 console.log("token",token);
-                displayResults(data);
+                displayResults(data.body);
               });
             } catch (error) {
               console.error("Error calling API Gateway:", error);
