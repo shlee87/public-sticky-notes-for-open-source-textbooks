@@ -90,35 +90,12 @@ class CommenterClass extends HTMLElement {
 
     commentRange(range) {
         const pageUrl = window.location.href;
-        console.log(pageUrl);
-        const noteUrl = `${chrome.runtime.getURL('AddNote.html')}?url=${encodeURIComponent(pageUrl)}`
-        //const noteUrl = chrome.runtime.getURL('AddNote.html');
-        console.log(noteUrl);
+        const paragraph = range.commonAncestorContainer.textContent;
+        console.log(range);
+        const noteUrl = `${chrome.runtime.getURL('AddNote.html')}?url=${encodeURIComponent(pageUrl)}&par=${encodeURIComponent(paragraph)}&start=${encodeURIComponent(range.startOffset)}&end=${encodeURIComponent(range.endOffset)}`;
         window.open(noteUrl, '_blank');
-
-        //chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-        //    const currentUrl = tabs[0].url;
-        //    console.log(currentUrl);
-        //    const newUrl = chrome.runtime.getURL(`AddNote.html?url=${encodeURIComponent(currentUrl)}`);
-        //    console.log(newUrl);
-        //    chrome.tabs.create({ url: newUrl });
-        //});
-
-        //document.addEventListener('DOMContentLoaded', function () {
-        //    console.log("Inside");
-        //    const doc = document.getElementById('textLocation');
-        //    console.log(doc);
-        //    doc.innerHTML = paragraph;
-        //});
-
-        //console.log("After");
-
-
-        const clone =
-            this.commentTemplate.cloneNode(true).content.firstElementChild;
-        clone.appendChild(range.extractContents());
-        range.insertNode(clone);
     }
 }
 
 window.customElements.define("stickit-commenter", CommenterClass);
+
