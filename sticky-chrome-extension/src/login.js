@@ -213,6 +213,10 @@ document.addEventListener('DOMContentLoaded', function () {
               const resultDiv = document.createElement("div");
               resultDiv.classList.add("search-result");
           
+              const commentedText = document.createElement("p");
+              commentedText.textContent = result.commentedText;
+              resultDiv.appendChild(commentedText);
+              
               const comment = document.createElement("p");
               comment.textContent = result.comment;
               resultDiv.appendChild(comment);
