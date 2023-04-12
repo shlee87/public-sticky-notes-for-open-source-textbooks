@@ -66,6 +66,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const signUpForm = document.getElementById('sign-up-form');
     const confirmForm = document.getElementById('confirm-email-form');
     const forgotForm = document.getElementById('forgot-form');
+    const searchForm = document.querySelector(".u-search");
+    const searchInput = document.querySelector(".u-search-input");
+
 
     if (signInForm) {
         signInForm.addEventListener('submit', function (event) {
@@ -187,12 +190,80 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     }
-    else {
-        Auth.currentAuthenticatedUser()
-            .then(user => {})
-            .catch(error => {
-                window.location.href = '/Login-Page.html';
+    // else {
+    //     Auth.currentAuthenticatedUser()
+    //         .then(user => {})
+    //         .catch(error => {
+    //             window.location.href = '/Login-Page.html';
+    //         });
+    // }
+
+    
+    if (searchForm){
+        function displayResults(results) {
+            const resultsContainer = document.querySelector("#sec-ce6e");
+            resultsContainer.innerHTML = "";
+          
+            if (!results || !('length' in results) || results.length === 0) {
+                resultsContainer.innerHTML = "<p>No results found.</p>";
+                return;
+            }
+          
+            results.forEach((result) => {
+              const resultDiv = document.createElement("div");
+              resultDiv.classList.add("search-result");
+          
+              const commentedText = document.createElement("p");
+              commentedText.textContent = result.commentedText;
+              resultDiv.appendChild(commentedText);
+              
+              const comment = document.createElement("p");
+              comment.textContent = result.comment;
+              resultDiv.appendChild(comment);
+          
+              const uri = document.createElement("p");
+              uri.innerHTML = `<a href="${result.uri}" target="_blank">${result.uri}</a>`;
+              resultDiv.appendChild(uri);
+          
+              resultsContainer.appendChild(resultDiv);
             });
+            resultsContainer.style.display = "block";
+        }
+          
+        searchForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const searchTerm = searchInput.value.trim();
+            if (!searchTerm) return;
+          
+            try {
+              const user = await Auth.currentAuthenticatedUser();
+              const token = user.signInUserSession.idToken.jwtToken;
+              const apiGatewayUrl = "https://ge98klsa8e.execute-api.us-east-1.amazonaws.com/stickit_stage/search";
+        
+        //      const lambdaUrl = "https://uwumu5g5672s7kfcmspjpwukki0nnxez.lambda-url.us-east-1.on.aws/";
+              const response = await fetch(apiGatewayUrl, {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: token,
+                },
+                body: JSON.stringify({ keyword: searchTerm }),
+              });
+            //   console.log("response",response)
+        
+        
+              response.json().then((data) => {
+             //   console.log("Parsed Lambda response:", data);
+               // console.log("Search term:", searchTerm);
+                console.log("Parsed API Gateway response:", data.body);
+                console.log("Lambda response:", data);
+                console.log("token",token);
+                displayResults(data.body);
+              });
+            } catch (error) {
+              console.error("Error calling API Gateway:", error);
+            }
+          });
     }
 });
 
