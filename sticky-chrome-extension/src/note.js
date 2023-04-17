@@ -4,11 +4,15 @@ const paragraph = urlParams.get('par');
 const range = urlParams.get('range');
 const startOffset = urlParams.get('start');
 const endOffset = urlParams.get('end');
+const color = urlParams.get('color');
+const xpath = urlParams.get('xpath');
 
 console.log(pageUrl);
 console.log(paragraph);
 console.log(startOffset);
 console.log(endOffset);
+console.log(color);
+console.log(xpath);
 
 
 const WebText = document.getElementById("WebText");

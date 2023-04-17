@@ -90,10 +90,28 @@ class CommenterClass extends HTMLElement {
 
     commentRange(range) {
         const pageUrl = window.location.href;
-        const paragraph = range.commonAncestorContainer.textContent;
+        const paragraph = range.commonAncestorContainer.parentNode.closest('p').textContent;
+        const xpath = this.getXPath(range.commonAncestorContainer.parentNode.closest('p')); 
         console.log(range);
-        const noteUrl = `${chrome.runtime.getURL('AddNote.html')}?url=${encodeURIComponent(pageUrl)}&par=${encodeURIComponent(paragraph)}&start=${encodeURIComponent(range.startOffset)}&end=${encodeURIComponent(range.endOffset)}`;
+        const noteUrl = `${chrome.runtime.getURL('AddNote.html')}?url=${encodeURIComponent(pageUrl)}&par=${encodeURIComponent(paragraph)}&start=${encodeURIComponent(range.startOffset)}&end=${encodeURIComponent(range.endOffset)}&color=${encodeURIComponent(commentColor)}&xpath=${encodeURIComponent(xpath)}`;
         window.open(noteUrl, '_blank');
+    }
+
+    getXPath(element) {
+        var xpath = [];
+        while (element && element.nodeType === Node.ELEMENT_NODE) {
+            let index = 0;
+            var sibling = element.previousSibling;
+            while (sibling) {
+                if (sibling.nodeType === Node.ELEMENT_NODE && sibling.nodeName === element.nodeName) {
+                    index++;
+                }
+                sibling = sibling.previousSibling;
+            }
+            xpath.unshift(element.nodeName.toLowerCase() + '[' + (index + 1) + ']');
+            element = element.parentNode;
+        }
+        return xpath.join('/');
     }
 }
 

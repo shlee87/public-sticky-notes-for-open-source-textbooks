@@ -81,12 +81,14 @@ class HighlighterClass extends HTMLElement {
     window.getSelection().empty();
   }
 
-  highlightRange(range) {
-    const clone =
-      this.highlightTemplate.cloneNode(true).content.firstElementChild;
-    clone.appendChild(range.extractContents());
-    range.insertNode(clone);
-  }
+    highlightRange(range) {
+        const inPara = range.commonAncestorContainer.parentNode.closest('p');
+        if (inPara) {
+            const clone = this.highlightTemplate.cloneNode(true).content.firstElementChild;
+            clone.appendChild(range.extractContents());
+            range.insertNode(clone);
+        }
+    }
 }
 
 window.customElements.define("stickit-highlighter", HighlighterClass);
