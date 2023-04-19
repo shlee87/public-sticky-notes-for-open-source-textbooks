@@ -2,59 +2,71 @@
     min-height: 714px;
 }
 
-    .u-section-1 .u-layout-wrap-1 {
-        margin-top: 0;
-        margin-bottom: 0;
-    }
+.note-form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-top: inherit;
+    padding-right: inherit;
+}
 
-    .u-section-1 .u-layout-cell-1 {
-        min-height: 724px;
-    }
+.note-area-container {
+    margin-top: auto;
+}
 
-    .u-section-1 .u-container-layout-1 {
-        padding: 30px;
-    }
+.u-section-1 .u-layout-wrap-1 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
 
-    .u-section-1 .u-text-1 {
-        margin-bottom: 0;
-        margin-top: 0;
-    }
+.u-section-1 .u-layout-cell-1 {
+    min-height: 724px;
+}
 
-    .u-section-1 .u-layout-cell-2 {
-        min-height: 482px;
-    }
+.u-section-1 .u-container-layout-1 {
+    padding: 30px;
+}
 
-    .u-section-1 .u-container-layout-2 {
-        padding: 30px 60px;
-    }
+.u-section-1 .u-text-1 {
+    margin-bottom: 0;
+    margin-top: 0;
+}
 
-    .u-section-1 .u-text-2 {
-        margin: 136px 0 0;
-    }
+.u-section-1 .u-layout-cell-2 {
+    min-height: 482px;
+}
 
-    .u-section-1 .u-layout-cell-3 {
-        min-height: 242px;
-    }
+.u-section-1 .u-container-layout-2 {
+    padding: 30px 60px;
+}
 
-    .u-section-1 .u-container-layout-3 {
-        padding: 0 15px;
-    }
+.u-section-1 .u-text-2 {
+    margin: 136px 0 0;
+}
 
-    .u-section-1 .u-form-1 {
-        height: 212px;
-        width: 436px;
-        margin: 21px auto 0;
-    }
+.u-section-1 .u-layout-cell-3 {
+    min-height: 242px;
+}
 
-    .u-section-1 .u-btn-1 {
-        background-image: none;
-        margin: 10px auto 0 0px;
-    }
+.u-section-1 .u-container-layout-3 {
+    padding: 0 15px;
+}
 
-    .u-section-1 .u-btn-2 {
-        background-image: none;
-        margin: -66px auto 0 280px;
-    }
+.u-section-1 .u-form-1 {
+    height: 212px;
+    width: 436px;
+    margin: 21px auto 0;
+}
+
+.u-section-1 .u-btn-1 {
+    background-image: none;
+    margin: 10px auto 0 0px;
+}
+
+.u-section-1 .u-btn-2 {
+    background-image: none;
+    margin: -66px auto 0 280px;
+}
 
 @media (max-width: 1199px) {
     .u-section-1 {
@@ -127,3 +139,9 @@
         margin-left: 0;
     }
 }
+
+#note-form {
+    height: auto;
+    margin-top: 0;
+}
+
