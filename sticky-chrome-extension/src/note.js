@@ -9,10 +9,12 @@ const endOffset = urlParams.get('end');
 const color = urlParams.get('color');
 const xpath = urlParams.get('xpath');
 
+console.log(color);
+console.log(xpath);
 // Note Page Containers
 const webText = document.getElementById("WebText");
 const noteArea = document.getElementById("note-area");
-const noteForm = document.getElementById("note-form");
+const noteSubmit = document.getElementById("noteSubmit");
 webText.innerHTML = paragraph;
 
 Auth.configure({
@@ -36,22 +38,24 @@ Auth.configure({
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-    noteForm.addEventListener('submit', function (event) {
+    noteSubmit.addEventListener('click', function (event) {
+        console.log("Submit Button Recognized");
         event.preventDefault();
-        const noteText = document.getElementById("note-text");
+        const noteText = document.getElementById("note-text").value;
 
         Auth.currentAuthenticatedUser()
             .then((user) => {
                 const selectedText = paragraph.substring(startOffset, endOffset);
                 const userId = user.attributes.sub;
                 // Method for calling the lambda fuction through the url
-                const lambdaUrl = 'https://5fsc2d65foupbkif3bwmu2ukhe0rftfq.lambda-url.us-east-1.on.aws/';
+                const lambdaUrl = 'https://5fsc2d65foupbkif3bwmu2ukhe0rftfq.lambda-url.us-east-1.on.aws';
                 // Method for passing over variables to the lambda function
                 const url = `${lambdaUrl}/?userId=${encodeURIComponent(userId)}&note=${encodeURIComponent(noteText)}&url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(selectedText)}&start=${encodeURIComponent(startOffset)}&end=${encodeURIComponent(endOffset)}&color=${encodeURIComponent(color)}&xpath=${encodeURIComponent(xpath)}`;
                 // call the function and get the response through the data output
                 fetch(url)
-                    .then(response => response.json())
-                    .thesn(data => console.log(data));
+                    .then(response)
+                    .then(data => console.log(data));
+                noteText = "";
             })
             // Catch any errors
             .catch((error) => console.log(error)); 
