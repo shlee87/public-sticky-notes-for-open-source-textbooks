@@ -90,15 +90,17 @@ class CommenterClass extends HTMLElement {
 
     commentRange(range) {
         const pageUrl = window.location.href.split('#')[0];
-        const paragraph = range.commonAncestorContainer.parentNode.closest('p').textContent;
-        const xpath = this.getXPath(range.commonAncestorContainer.parentNode.closest('p')); 
-        console.log(range);
-        const noteUrl = `${chrome.runtime.getURL('AddNote.html')}?url=${encodeURIComponent(pageUrl)}&par=${encodeURIComponent(paragraph)}&start=${encodeURIComponent(range.startOffset)}&end=${encodeURIComponent(range.endOffset)}&color=${encodeURIComponent(commentColor)}&xpath=${encodeURIComponent(xpath)}`;
-        window.open(noteUrl, '_blank');
-        const clone =
-            this.commentTemplate.cloneNode(true).content.firstElementChild;
-        clone.appendChild(range.extractContents());
-        range.insertNode(clone);
+        try {
+            const paragraph = range.commonAncestorContainer.parentNode.closest('p').textContent;
+            const xpath = this.getXPath(range.commonAncestorContainer.parentNode.closest('p'));
+            console.log(range);
+            const noteUrl = `${chrome.runtime.getURL('AddNote.html')}?url=${encodeURIComponent(pageUrl)}&par=${encodeURIComponent(paragraph)}&start=${encodeURIComponent(range.startOffset)}&end=${encodeURIComponent(range.endOffset)}&color=${encodeURIComponent(commentColor)}&xpath=${encodeURIComponent(xpath)}`;
+            window.open(noteUrl, '_blank');
+            const clone =
+                this.commentTemplate.cloneNode(true).content.firstElementChild;
+            clone.appendChild(range.extractContents());
+            range.insertNode(clone);
+        } catch (e) {}
     }
 
     getXPath(element) {

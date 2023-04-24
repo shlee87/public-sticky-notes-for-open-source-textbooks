@@ -29,7 +29,7 @@
                             <div class="u-container-style u-layout-cell u-size-60 u-layout-cell-1">
                                 <div class="u-container-layout u-valign-top u-container-layout-1">
                                     <h3>Context</h3>
-                                    <div id="WebText"></div>
+                                    <div id="WebText" style="background-color: white; border: 1px solid grey; padding-inline: 20px; padding-top: 10px; padding-bottom: 15px;"></div>
                                 </div>
                             </div>
                         </div>
@@ -44,6 +44,9 @@
                                         <div class="u-form-group u-form-message u-label-none">
                                             <label for="note-form" class="u-label">Note</label>
                                             <textarea placeholder="Enter your note" rows="4" cols="50" id="note-text" name="note" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required=""></textarea>
+                                        </div>
+                                        <div id="note-form" class="u-align-left u-form-group">
+                                            <div id="error-text" style="display:none; color:red;"></div>
                                         </div>
                                         <div class="u-align-left u-form-group u-form-submit">
                                             <a href="#" id="noteSubmit" class="u-border-none u-btn u-btn-submit u-button-style u-palette-5-dark-2 u-btn-1">Submit</a>

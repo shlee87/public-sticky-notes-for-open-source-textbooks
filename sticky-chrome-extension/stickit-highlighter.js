@@ -82,12 +82,14 @@ class HighlighterClass extends HTMLElement {
   }
 
     highlightRange(range) {
-        const inPara = range.commonAncestorContainer.parentNode.closest('p');
-        if (inPara) {
-            const clone = this.highlightTemplate.cloneNode(true).content.firstElementChild;
-            clone.appendChild(range.extractContents());
-            range.insertNode(clone);
-        }
+        try {
+            const inPara = range.commonAncestorContainer.parentNode.closest('p');
+            if (inPara) {
+                const clone = this.highlightTemplate.cloneNode(true).content.firstElementChild;
+                clone.appendChild(range.extractContents());
+                range.insertNode(clone);
+            }
+        } catch (e) { };
     }
 }
 
