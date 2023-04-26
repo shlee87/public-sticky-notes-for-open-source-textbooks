@@ -53,3 +53,8 @@ a browser follow these steps.
 #. click on "Load unpacked"
 #. select the build folder in the public-sticky-notes-for-open-source-textbooks folder
 #. click on the extension icon on the top right of the browser
+
+
+
+Folders&file structures
+=======================
