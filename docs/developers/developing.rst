@@ -26,15 +26,8 @@ To build StickIT for development:
    cd public-sticky-notes-for-open-source-textbooks
    npm run build
 
-You now have a development built. To run your development client in
-a browser follow these steps.
+You now have a development built. 
 
-   1. open a chrome browser.
-   2. go to chrome://extensions
-   3. click on "Load unpacked"
-   4. select the build folder in the public-sticky-notes-for-open-source-textbooks folder
-   5. click on the extension icon on the top right of the browser
-   
 
 
 
@@ -48,33 +41,21 @@ then running the client from the browser extension is easiest.
 
 .. _running-from-browser-ext:
 
-Running the Client from the Browser Extension
+Running the Chrome extension
 ---------------------------------------------
 
-This is the currently easiest way to get your development client running in a
-browser. It sets you up to make changes to the client and to the Chrome
-extension itself, but not to h.
 
-#. Check out the
-   `browser extension <https://github.com/hypothesis/browser-extension>`_
-   and follow the steps in the browser extension's documentation to build the
-   extension and configure it to use your local version of the client and the
-   production Hypothesis service.
+To run your development client in
+a browser follow these steps.
 
-#. Start the client's development server to rebuild the client whenever it
-   changes:
+#. open a chrome browser.
+#. go to chrome://extensions
+#. click on "Load unpacked"
+#. select the build folder in the public-sticky-notes-for-open-source-textbooks folder
+#. click on the extension icon on the top right of the browser
 
-    .. code-block:: sh
 
-       make dev
 
-#. After making changes to the client, you will need to run ``make`` in the
-   browser extension repo and reload the extension in Chrome to see changes.
-   You can use
-   `Extensions Reloader <https://chrome.google.com/webstore/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid?hl=en>`_
-   to make this easier.
-
-.. _running-from-h:
 
 Running the Client From h
 -------------------------
