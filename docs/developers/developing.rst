@@ -67,5 +67,7 @@ Folders & files
 ====================
 This sections explain how the folders and files are organized in StickIT.
 
+
+
 public-sticky-notes-for-open-source-textbooks/sticky-chrome-extension
 #####################################################################
