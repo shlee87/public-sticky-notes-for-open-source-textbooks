@@ -11,3 +11,4 @@ pages. Stick-It is a Chrome extension for annotating and discussing open-source 
    :caption: Contents
 
    developers/index
+   users/index

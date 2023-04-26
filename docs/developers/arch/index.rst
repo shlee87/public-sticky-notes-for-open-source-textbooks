@@ -6,8 +6,4 @@ made or proposed when developing StickIT. We record these in
 order to provide a reference for the history, motivation, and rationale for past
 decisions.
 
-
-.. toctree::
-   :maxdepth: 1
-
-   adr-001
+TBD
