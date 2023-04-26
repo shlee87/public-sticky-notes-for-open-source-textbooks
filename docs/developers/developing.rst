@@ -27,7 +27,19 @@ To build StickIT for development:
    npm run build
 
 You now have a development built. To run your development client in
-a browser you'll need a local copy of either the Hypothesis Chrome extension or
+a browser follow these steps.
+
+   1. open a chrome browser.
+   2. go to chrome://extensions
+   3. click on "Load unpacked"
+   4. select the build folder in the public-sticky-notes-for-open-source-textbooks folder
+   5. click on the extension icon on the top right of the browser
+   
+
+
+
+
+you'll need a local copy of either the Hypothesis Chrome extension or
 h. Follow either :ref:`running-from-browser-ext` or
 :ref:`running-from-h` below.
 If you're only interested in making changes to the client (and not to h)
