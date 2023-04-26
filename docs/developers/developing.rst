@@ -60,3 +60,9 @@ StickIT Architecture
 ====================
 
 This section explains the architecture of StickIT.
+
+
+
+Folders & files
+====================
+This sections explain how the folders and files are organized in StickIT.
