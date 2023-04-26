@@ -1,10 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
     const searchForm = document.querySelector(".u-search");
     const searchInput = document.querySelector(".u-search-input");
+    var PrivateToggle = document.getElementById("privateToggle");
   
     searchForm.addEventListener("submit", async (event) => {
       event.preventDefault();
       const searchTerm = searchInput.value.trim();
+      if (PrivateToggle.checked == true){
+        //use private query
+      } else {
+        //use public query
+      }
       if (searchTerm.length === 0) {
         return;
       }
