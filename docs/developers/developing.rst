@@ -73,19 +73,17 @@ Folders
 
 public-sticky-notes-for-open-source-textbooks/sticky-chrome-extension
 #####################################################################
-
 this is a folder that has all files for the chrome extension.
 
 public-sticky-notes-for-open-source-textbooks/docs
 ##################################################
-
-This is a folder that has all code documentation files.
-
-public-sticky-notes-for-open-source-textbooks/chrome-extension-directory
-##########################################################################
-This folder contains all the files necessary for the Chrome extension.
-
-public-sticky-notes-for-open-source-textbooks/docs
-##################################################
-
 This folder houses all the files related to code documentation.
+
+public-sticky-notes-for-open-source-textbooks/lambda
+#####################################################
+This folder contains function files for AWS lambda.
+
+
+
+feature-related files
+---------------------------------------------
