@@ -45,8 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
     try {
         noteSubmit.addEventListener('click', function (event) {
             console.log("Submit Button Recognized");
-            event.preventDefault();
-            const noteText = document.getElementById("note-text").value;
+            var noteText = document.getElementById("note-text");
 
             if (noteText) {
                 Auth.currentAuthenticatedUser()
@@ -57,12 +56,13 @@ document.addEventListener('DOMContentLoaded', function () {
                         // Method for calling the lambda fuction through the url
                         const lambdaUrl = 'https://5fsc2d65foupbkif3bwmu2ukhe0rftfq.lambda-url.us-east-1.on.aws';
                         // Method for passing over variables to the lambda function
-                        const url = `${lambdaUrl}/?userId=${encodeURIComponent(userId)}&username=${encodeURIComponent(username)}&note=${encodeURIComponent(noteText)}&url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(selectedText)}&start=${encodeURIComponent(startOffset)}&end=${encodeURIComponent(endOffset)}&color=${encodeURIComponent(color)}&xpath=${encodeURIComponent(xpath)}`;
+                        const url = `${lambdaUrl}/?userId=${encodeURIComponent(userId)}&username=${encodeURIComponent(username)}&note=${encodeURIComponent(noteText.value)}&url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(selectedText)}&start=${encodeURIComponent(startOffset)}&end=${encodeURIComponent(endOffset)}&color=${encodeURIComponent(color)}&xpath=${encodeURIComponent(xpath)}`;
                         // call the function and get the response through the data output
                         fetch(url)
-                            .then(response)
+                            .then(response => response.json())
                             .then(data => console.log(data));
-                        noteText = "";
+                        noteText.value = noteText.defaultValue;
+
                     })
                     // Catch any errors
                     .catch((error) => {
