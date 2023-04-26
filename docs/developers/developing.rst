@@ -56,5 +56,7 @@ a browser follow these steps.
 
 
 
-Folders&file structures
-=======================
+StickIT Architecture
+====================
+
+This section explains the architecture of StickIT.
