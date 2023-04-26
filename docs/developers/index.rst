@@ -8,4 +8,8 @@ StickIT
    :maxdepth: 2
 
    developing
-   
+   envvars
+   mobile
+   security
+   docs
+   arch/index
