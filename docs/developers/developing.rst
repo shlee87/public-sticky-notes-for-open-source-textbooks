@@ -87,3 +87,18 @@ This folder contains function files for AWS lambda.
 
 feature-related files
 ---------------------------------------------
+
+Sign up
+########
+
+Sign In
+#######
+
+Search
+######
+
+Highlight
+#########
+
+Note
+####
