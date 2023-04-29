@@ -91,16 +91,34 @@ class CommenterClass extends HTMLElement {
     commentRange(range) {
         const pageUrl = window.location.href.split('#')[0];
         try {
-            const paragraph = range.commonAncestorContainer.parentNode.closest('p').textContent;
-            const xpath = this.getXPath(range.commonAncestorContainer.parentNode.closest('p'));
-            const noteUrl = `${chrome.runtime.getURL('AddNote.html')}?url=${encodeURIComponent(pageUrl)}&par=${encodeURIComponent(paragraph)}&start=${encodeURIComponent(range.startOffset)}&end=${encodeURIComponent(range.endOffset)}&color=${encodeURIComponent(commentColor)}&xpath=${encodeURIComponent(xpath)}`;
+            const paragraph = range.commonAncestorContainer.parentNode.closest('p');
+            const paragraphText = paragraph.textContent;
+            const selectedText = range.toString();
+            const startOffset = paragraphText.indexOf(selectedText);
+            const endOffset = startOffset + selectedText.length;
+            const xpath = this.getXPath(paragraph);
+            const noteUrl = `${chrome.runtime.getURL('AddNote.html')}?url=${encodeURIComponent(pageUrl)}&par=${encodeURIComponent(paragraphText)}&start=${encodeURIComponent(startOffset)}&end=${encodeURIComponent(endOffset)}&color=${encodeURIComponent(commentColor)}&xpath=${encodeURIComponent(xpath)}`;
             window.open(noteUrl, '_blank');
-            const clone =
-                this.commentTemplate.cloneNode(true).content.firstElementChild;
+            const clone = this.commentTemplate.cloneNode(true).content.firstElementChild;
             clone.appendChild(range.extractContents());
             range.insertNode(clone);
-        } catch (e) {}
+        } catch (e) { }
     }
+
+
+    //commentRange(range) {
+    //    const pageUrl = window.location.href.split('#')[0];
+    //    try {
+    //        const paragraph = range.commonAncestorContainer.parentNode.closest('p').textContent;
+    //        const xpath = this.getXPath(range.commonAncestorContainer.parentNode.closest('p'));
+    //        const noteUrl = `${chrome.runtime.getURL('AddNote.html')}?url=${encodeURIComponent(pageUrl)}&par=${encodeURIComponent(paragraph)}&start=${encodeURIComponent(range.startOffset)}&end=${encodeURIComponent(range.endOffset)}&color=${encodeURIComponent(commentColor)}&xpath=${encodeURIComponent(xpath)}`;
+    //        window.open(noteUrl, '_blank');
+    //        const clone =
+    //            this.commentTemplate.cloneNode(true).content.firstElementChild;
+    //        clone.appendChild(range.extractContents());
+    //        range.insertNode(clone);
+    //    } catch (e) {}
+    //}
 
     getXPath(element) {
         var xpath = [];

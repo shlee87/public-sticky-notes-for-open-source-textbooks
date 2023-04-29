@@ -61,7 +61,9 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(response => response.text())
         .then(html => {
             // Inject notes into html page
-            noteArea.innerHTML = html;
+            if (html) {
+                noteArea.innerHTML = html;
+            }
         })
         .catch(error => {
             console.error(error);
@@ -87,7 +89,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         fetch(url)
                             .catch(e => console.error(e));
                         noteText.value = noteText.defaultValue;
-
                     })
                     // Catch any errors
                     .catch((error) => {
