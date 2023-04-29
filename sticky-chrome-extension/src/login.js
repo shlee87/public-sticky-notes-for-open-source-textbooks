@@ -63,7 +63,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const forgotForm = document.getElementById('forgot-form');
     const searchForm = document.querySelector(".u-search");
     const searchInput = document.querySelector(".u-search-input");
-
+    var PrivateToggle = document.getElementById("privateToggle");
+    var Private;
 
     if (signInForm) {
         signInForm.addEventListener('submit', function (event) {
@@ -209,15 +210,15 @@ document.addEventListener('DOMContentLoaded', function () {
               resultDiv.classList.add("search-result");
           
               const commentedText = document.createElement("p");
-              commentedText.textContent = result.commentedText;
+              commentedText.textContent = result.highlighted_text;
               resultDiv.appendChild(commentedText);
               
               const comment = document.createElement("p");
-              comment.textContent = result.comment;
+              comment.textContent = result.text;
               resultDiv.appendChild(comment);
           
               const uri = document.createElement("p");
-              uri.innerHTML = `<a href="${result.uri}" target="_blank">${result.uri}</a>`;
+              uri.innerHTML = `<a href="${result.page_url}" target="_blank">${result.page_url}</a>`;
               resultDiv.appendChild(uri);
           
               resultsContainer.appendChild(resultDiv);
@@ -229,11 +230,18 @@ document.addEventListener('DOMContentLoaded', function () {
             event.preventDefault();
             const searchTerm = searchInput.value.trim();
             if (!searchTerm) return;
+
+            if (PrivateToggle.checked == true){
+                Private = "true";
+              } else {
+                Private = "false";
+              }
           
             try {
               const user = await Auth.currentAuthenticatedUser();
               const token = user.signInUserSession.idToken.jwtToken;
               const apiGatewayUrl = "https://ge98klsa8e.execute-api.us-east-1.amazonaws.com/stickit_stage/search";
+              const userId = user.attributes.sub;
         
         //      const lambdaUrl = "https://uwumu5g5672s7kfcmspjpwukki0nnxez.lambda-url.us-east-1.on.aws/";
               const response = await fetch(apiGatewayUrl, {
@@ -242,7 +250,7 @@ document.addEventListener('DOMContentLoaded', function () {
                   "Content-Type": "application/json",
                   Authorization: token,
                 },
-                body: JSON.stringify({ keyword: searchTerm }),
+                body: JSON.stringify({ keyword: searchTerm, isPrivate: Private, user_id: userId}),
               });
             //   console.log("response",response)
         
