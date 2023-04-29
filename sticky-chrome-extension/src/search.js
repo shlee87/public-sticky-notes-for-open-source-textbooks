@@ -21,23 +21,21 @@ Auth.configure({
 });
 
 
-Auth.currentAuthenticatedUser()
- .then((user) => {
-    const userId = user.attributes.sub;
- });
+
 
 document.addEventListener("DOMContentLoaded", function () {
     const searchForm = document.querySelector(".u-search");
     const searchInput = document.querySelector(".u-search-input");
     var PrivateToggle = document.getElementById("privateToggle");
+    var isPrivate;
   
     searchForm.addEventListener("submit", async (event) => {
       event.preventDefault();
       const searchTerm = searchInput.value.trim();
       if (PrivateToggle.checked == true){
-        //use private query
+        isPrivate = true;
       } else {
-        //use public query
+        isPrivate = false;
       }
       if (searchTerm.length === 0) {
         return;
@@ -46,7 +44,9 @@ document.addEventListener("DOMContentLoaded", function () {
       try {
         const user = await Auth.currentAuthenticatedUser();
         const token = user.signInUserSession.idToken.jwtToken;
+        const userId = user.attributes.sub;
   
+              
         const lambdaUrl = "https://uwumu5g5672s7kfcmspjpwukki0nnxez.lambda-url.us-east-1.on.aws/";
         const response = await fetch(lambdaUrl, {
           method: "POST",
@@ -54,14 +54,15 @@ document.addEventListener("DOMContentLoaded", function () {
             "Content-Type": "application/json",
             Authorization: token,
           },
-          body: JSON.stringify({ searchTerm }),
+          body: JSON.stringify({ searchTerm, isPrivate, userId}),
         });
-  
+        
         const data = await response.json();
         console.log("Lambda response:", data);
       } catch (error) {
         console.error("Error calling Lambda function:", error);
       }
     });
+          
   });
   
