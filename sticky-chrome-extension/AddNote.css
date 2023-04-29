@@ -2,6 +2,26 @@
     min-height: 714px;
 }
 
+.note-container {
+    border: 1px solid black;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: white;
+}
+
+.note-highlight {
+    font-weight: bold;
+}
+
+.note-username {
+    font-style: italic;
+}
+
+.note-created-at {
+    font-size: 0.8em;
+    color: #666;
+}
+
 .note-form-container {
     display: flex;
     flex-direction: column;
@@ -144,4 +164,3 @@
     height: auto;
     margin-top: 0;
 }
-

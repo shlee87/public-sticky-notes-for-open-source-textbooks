@@ -1,42 +1,53 @@
 const { createConnection } = require('mysql2/promise');
 
-async function saveNote(user_id, username, noteText, pageUrl, text, startOffset, endOffset, color, xpath) {
-	const connection = await createConnection({
-		host: process.env.RDS_HOST,
-		user: process.env.RDS_USER,
-		password: process.env.RDS_PASSWORD,
-		database: process.env.RDS_DB
-	});
+async function saveNote(user_id, pageUrl, xpath) {
+    const connection = await createConnection({
+        host: process.env.RDS_HOST,
+        user: process.env.RDS_USER,
+        password: process.env.RDS_PASSWORD,
+        database: process.env.RDS_DB
+    });
 
-	console.log("Connection: ", connection);
+    const query = `
+    SELECT n.text AS note_text, h.highlighted_text, u.username, n.created_at AS note_created_at
+    FROM Notes n
+    JOIN Highlights h ON n.highlight_id = h.id
+    JOIN Users u ON n.userId = u.user_id
+    WHERE h.page_url = ? AND h.xpath = ?
+    ORDER BY h.end_offset`;
 
-	const checkUser = `SELECT COUNT(*) FROM Users WHERE user_id = '${user_id}';`;
-	const check = await connection.execute(checkUser);
-	console.log("Found Users: ", check);
+    const [results] = await connection.execute(query, [pageUrl, xpath]);
 
-	if (check) {
-		const query = `INSERT INTO Users (username, user_id) VALUES ('${username}', '${user_id}');`;
-		await connection.execute(query);
-	}
+    await connection.end();
 
-	const query1 = `INSERT INTO Highlights (page_url, highlighted_text, start_offset, end_offset, created_at, userId, color, xpath) VALUES ('${pageUrl}', '${text}', '${startOffset}', '${endOffset}', NOW(), '${user_id}', '${color}', '${xpath}');`;
-	const query2 = `INSERT INTO Notes (userId, highlight_id, text, created_at) VALUES ('${user_id}', (SELECT id FROM Highlights WHERE page_url = '${pageUrl}' AND highlighted_text = '${text}'), '${noteText}', NOW());`;
-	await connection.execute(query1);
-	await connection.execute(query2);
+    let notesHtml = '';
 
-	await connection.end();
+    for (const result of results) {
+        notesHtml += `
+      <div class="note-container">
+        <span class="note-highlight">Highlighted Text:</span> ${result.highlighted_text}
+        <br>
+        <span class="note-content">Note Content:</span> ${result.note_text}
+        <br>
+        <span class="note-username">Username:</span> ${result.username}
+        <br>
+        <span class="note-created-at">Created At:</span> ${result.note_created_at}
+      </div>`;
+    }
 
-	return;
+    return notesHtml;
 }
 
 exports.handler = async (event, context) => {
-	const user_id = event.queryStringParameters.userId;
-	const pageUrl = event.queryStringParameters.url;
-	const xpath = event.queryStringParameters.xpath;
+    const user_id = event.queryStringParameters.userId;
+    const pageUrl = event.queryStringParameters.url;
+    const xpath = event.queryStringParameters.xpath;
 
-	await saveNote(user_id, pageUrl, );
+    const html = await saveNote(user_id, pageUrl, xpath);
 
-	return {
-		statusCode: 200
-	};
+    return {
+        statusCode: 200,
+        headers: { 'Content-Type': 'text/html' },
+        body: html
+    };
 }

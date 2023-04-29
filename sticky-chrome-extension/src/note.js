@@ -42,6 +42,32 @@ function displayErrorText(message) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+    // Checks if there is a user logged in
+    var user_id = "0";
+    try {
+        const u = Auth.currentAuthenticatedUser();
+        user_id = u.attributes.sub;
+    } catch (e) {};
+
+    // Load Notes
+    const lambdaUrl = 'https://dzp2sptvjmcbp3hkjmi34dyhnu0hhwhn.lambda-url.us-east-1.on.aws';
+    // Method for passing over variables to the lambda function
+    console.log(user_id, pageUrl, xpath);
+
+    const url = `${lambdaUrl}/?userId=${encodeURIComponent(user_id)}&url=${encodeURIComponent(pageUrl)}&xpath=${encodeURIComponent(xpath)}`;
+    console.log(url);
+    // call the function and get the response through the data output
+    fetch(url)
+        .then(response => response.text())
+        .then(html => {
+            // Inject notes into html page
+            noteArea.innerHTML = html;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+    // Save notes on submit button click
     try {
         noteSubmit.addEventListener('click', function (event) {
             console.log("Submit Button Recognized");
@@ -59,8 +85,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         const url = `${lambdaUrl}/?userId=${encodeURIComponent(userId)}&username=${encodeURIComponent(username)}&note=${encodeURIComponent(noteText.value)}&url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(selectedText)}&start=${encodeURIComponent(startOffset)}&end=${encodeURIComponent(endOffset)}&color=${encodeURIComponent(color)}&xpath=${encodeURIComponent(xpath)}`;
                         // call the function and get the response through the data output
                         fetch(url)
-                            .then(response => response.json())
-                            .then(data => console.log(data));
+                            .catch(e => console.error(e));
                         noteText.value = noteText.defaultValue;
 
                     })
