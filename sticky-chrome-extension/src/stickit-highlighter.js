@@ -1,14 +1,6 @@
 import { Auth } from 'aws-amplify';
 const highlightColor = "rgb(213, 234, 255)";
-
-// url params
-const urlParams = new URLSearchParams(window.location.search);
-const pageUrl = urlParams.get('url');
-const paragraph = urlParams.get('par');
-const startOffset = urlParams.get('start');
-const endOffset = urlParams.get('end');
-const color = urlParams.get('color');
-const xpath = urlParams.get('xpath');
+var url;
 
 Auth.configure({
     Auth: {
@@ -112,28 +104,32 @@ class HighlighterClass extends HTMLElement {
 
     highlightRange(range) {
         const pageUrl = window.location.href.split('#')[0];
-        const xpath = this.getXPath(range.commonAncestorContainer.parentNode.closest('p'));
-        console.log(range);
-    const clone =
-      this.highlightTemplate.cloneNode(true).content.firstElementChild;
-    clone.appendChild(range.extractContents());
-        range.insertNode(clone);
-        Auth.currentAuthenticatedUser()
-            .then((user) => {
-                const selectedText = paragraph.substring(startOffset, endOffset);
-                const userId = user.attributes.sub;
-                // Method for calling the lambda fuction through the url
-                const lambdaUrl = 'https://5fsc2d65foupbkif3bwmu2ukhe0rftfq.lambda-url.us-east-1.on.aws';
-                // Method for passing over variables to the lambda function
-                const url = `${lambdaUrl}/?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(selectedText)}&start=${encodeURIComponent(startOffset)}&end=${encodeURIComponent(endOffset)}&userId=${encodeURIComponent(userId)}&color=${encodeURIComponent(color)}&xpath=${encodeURIComponent(xpath)}`;
-                // call the function and get the response through the data output
-                fetch(url)
-                    .then(response)
-                    .then(data => console.log(data));
-                noteText = "";
-            })
-            // Catch any errors
-            .catch((error) => console.log(error));
+        try {
+            const xpath = this.getXPath(range.commonAncestorContainer.parentNode.closest('p'));
+            console.log(range);
+            const paragraph = range.commonAncestorContainer.parentNode.closest('p');
+            Auth.currentAuthenticatedUser()
+                .then((user) => {
+                    console.log(user)
+                    const selectedText = paragraph.substring(startOffset, endOffset);
+                    const userId = user.attributes.sub;
+                    // Method for calling the lambda fuction through the url
+                    const lambdaUrl = 'https://5fsc2d65foupbkif3bwmu2ukhe0rftfq.lambda-url.us-east-1.on.aws';
+                    // Method for passing over variables to the lambda function
+                    const url = `${lambdaUrl}/?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(selectedText)}&start=${encodeURIComponent(range.startOffset)}&end=${encodeURIComponent(range.endOffset)}&userId=${encodeURIComponent(userId)}&color=${encodeURIComponent(highlightColor)}&xpath=${encodeURIComponent(xpath)}`;
+                    // call the function and get the response through the data output
+                    fetch(url)
+                        .then(response)
+                        .then(data => console.log(data));
+                })
+                // Catch any errors
+                .catch((error) => console.log(error));
+            const clone =
+                this.highlightTemplate.cloneNode(true).content.firstElementChild;
+            clone.appendChild(range.extractContents());
+            range.insertNode(clone);
+        }
+        catch (e) { } 
     }
      
 
