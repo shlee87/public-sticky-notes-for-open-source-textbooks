@@ -1,4 +1,6 @@
-const commentColor = "rgb(255, 0, 0)";
+const commentColor = "rgb(255, 204, 128)";
+//const commentColor = "rgb(255, 204, 0)";
+
 var url;
 
 const commentTemplate = `

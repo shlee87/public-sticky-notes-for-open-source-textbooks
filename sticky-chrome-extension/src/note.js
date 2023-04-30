@@ -98,7 +98,6 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(response => response.text())
         .then(html => {
             // Inject notes into html page
-            console.log(html);
             if (html) {
                 noteArea.innerHTML = html;
             }

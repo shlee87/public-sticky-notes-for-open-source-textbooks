@@ -1,4 +1,4 @@
-const highlightColor = "rgb(213, 234, 255)";
+const highlightColor = "rgb(255, 242, 153)";
 
 const highlightTemplate = `
   <template id="highlightTemplate">
