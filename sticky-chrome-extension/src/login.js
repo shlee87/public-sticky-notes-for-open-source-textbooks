@@ -198,74 +198,87 @@ document.addEventListener('DOMContentLoaded', function () {
     if (searchForm){
         function displayResults(results) {
             const resultsContainer = document.querySelector("#sec-ce6e");
-            resultsContainer.innerHTML = "";
           
-            if (!results || !('length' in results) || results.length === 0) {
+            if (results == "") {
                 resultsContainer.innerHTML = "<p>No results found.</p>";
                 return;
             }
+            else {
+                resultsContainer.innerHTML = results;
+            }
+            // results.forEach((result) => {
+            //   const resultDiv = document.createElement("div");
+            //   resultDiv.classList.add("search-result");
           
-            results.forEach((result) => {
-              const resultDiv = document.createElement("div");
-              resultDiv.classList.add("search-result");
-          
-              const commentedText = document.createElement("p");
-              commentedText.textContent = result.highlighted_text;
-              resultDiv.appendChild(commentedText);
+            //   const commentedText = document.createElement("p");
+            //   commentedText.textContent = result.highlighted_text;
+            //   resultDiv.appendChild(commentedText);
               
-              const comment = document.createElement("p");
-              comment.textContent = result.text;
-              resultDiv.appendChild(comment);
+            //   const comment = document.createElement("p");
+            //   comment.textContent = result.text;
+            //   resultDiv.appendChild(comment);
           
-              const uri = document.createElement("p");
-              uri.innerHTML = `<a href="${result.page_url}" target="_blank">${result.page_url}</a>`;
-              resultDiv.appendChild(uri);
+            //   const uri = document.createElement("p");
+            //   uri.innerHTML = `<a href="${result.page_url}" target="_blank">${result.page_url}</a>`;
+            //   resultDiv.appendChild(uri);
           
-              resultsContainer.appendChild(resultDiv);
-            });
+            //   resultsContainer.appendChild(resultDiv);
+            // });
             resultsContainer.style.display = "block";
         }
           
         searchForm.addEventListener("submit", async (event) => {
             event.preventDefault();
             const searchTerm = searchInput.value.trim();
-            if (!searchTerm) return;
-
-            if (PrivateToggle.checked == true){
-                Private = "true";
-              } else {
-                Private = "false";
-              }
-          
-            try {
-              const user = await Auth.currentAuthenticatedUser();
-              const token = user.signInUserSession.idToken.jwtToken;
-              const apiGatewayUrl = "https://ge98klsa8e.execute-api.us-east-1.amazonaws.com/stickit_stage/search";
-              const userId = user.attributes.sub;
-        
-        //      const lambdaUrl = "https://uwumu5g5672s7kfcmspjpwukki0nnxez.lambda-url.us-east-1.on.aws/";
-              const response = await fetch(apiGatewayUrl, {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization: token,
-                },
-                body: JSON.stringify({ keyword: searchTerm, isPrivate: Private, user_id: userId}),
-              });
-            //   console.log("response",response)
-        
-        
-              response.json().then((data) => {
-             //   console.log("Parsed Lambda response:", data);
-               // console.log("Search term:", searchTerm);
-                console.log("Parsed API Gateway response:", data.body);
-                console.log("Lambda response:", data);
-                console.log("token",token);
-                displayResults(data.body);
-              });
-            } catch (error) {
-              console.error("Error calling API Gateway:", error);
+            console.log(searchTerm);
+            if (searchTerm == "") {
+                const resultsContainer = document.querySelector("#sec-ce6e");
+                resultsContainer.innerHTML = `
+                <div class="u-clearfix u-sheet u-sheet-1">
+                <h1 class="u-text u-text-custom-color-5 u-text-default u-text-1" id="HomeText"></h1><span class="u-file-icon u-icon u-text-custom-color-5 u-icon-1"><img src="images/8140096-36568aa7.png" alt=""></span>
+                </div>`;
+                
             }
+            else{ 
+                if (PrivateToggle.checked == true){
+                    Private = "true";
+                  } else {
+                    Private = "false";
+                  }
+              
+                try {
+                  const user = await Auth.currentAuthenticatedUser();
+                  const token = user.signInUserSession.idToken.jwtToken;
+                  const apiGatewayUrl = "https://ge98klsa8e.execute-api.us-east-1.amazonaws.com/stickit_stage/search";
+                  const userId = user.attributes.sub;
+            
+            //      const lambdaUrl = "https://uwumu5g5672s7kfcmspjpwukki0nnxez.lambda-url.us-east-1.on.aws/";
+                  const response = await fetch(apiGatewayUrl, {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                      Authorization: token,
+                    },
+                    body: JSON.stringify({ keyword: searchTerm, isPrivate: Private, user_id: userId}),
+                  });
+                //   console.log("response",response)
+            
+            
+                  response.json().then((data) => {
+                 //   console.log("Parsed Lambda response:", data);
+                   // console.log("Search term:", searchTerm);
+                    console.log(data);
+                    console.log("Parsed API Gateway response:", data.body);
+                    console.log("Lambda response:", data);
+                    console.log("token",token);
+                    displayResults(data.body);
+                  });
+                } catch (error) {
+                  console.error("Error calling API Gateway:", error);
+                }
+            };
+
+            
           });
     }
 });

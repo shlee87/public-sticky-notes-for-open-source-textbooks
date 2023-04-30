@@ -2,6 +2,31 @@
   min-height: 300px;
 }
 
+.note-content {
+  font-size: x-large;
+  color: black;
+}
+
+.note-container {
+  border: 1px solid black;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: white;
+  color: black;
+}
+
+.note-highlight {
+  font-weight: lighter;
+  font-style: italic;
+  font-size: medium;
+  color: black;
+}
+
+.note-created-at {
+  font-size: 0.8em;
+  color: #666;
+}
+
 .u-section-1 .u-text-1 {
   margin: 127px auto 0;
 }
