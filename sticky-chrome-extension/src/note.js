@@ -1,4 +1,6 @@
 import { Auth } from 'aws-amplify';
+var previousHighlightEndOffset;
+
 
 // url params
 const urlParams = new URLSearchParams(window.location.search);
@@ -14,7 +16,7 @@ const webText = document.getElementById("WebText");
 const noteArea = document.getElementById("note-area");
 const noteSubmit = document.getElementById("noteSubmit");
 const errorText = document.getElementById("error-text");
-webText.innerHTML = paragraph;
+webText.innerText = paragraph;
 
 Auth.configure({
     Auth: {
@@ -47,20 +49,56 @@ document.addEventListener('DOMContentLoaded', function () {
     try {
         const u = Auth.currentAuthenticatedUser();
         user_id = u.attributes.sub;
-    } catch (e) {};
+    } catch (e) { };
+
+    // Load Highlights
+    const startUrl = 'https://img5s4tmbdkhrsa76t6kjj3bfa0uwyzo.lambda-url.us-east-1.on.aws';
+    // Method for passing over variables to the lambda function
+
+    const newUrl = `${startUrl}/?userId=${encodeURIComponent(user_id)}&url=${encodeURIComponent(pageUrl)}&xpath=${encodeURIComponent(xpath)}`;
+    // call the function and get the response through the data output
+
+    fetch(newUrl)
+        .then(response => response.json())
+        .then(highlights => {
+            console.log(highlights);
+
+            let previousEndOffset = 0;
+            let highlightedText = '';
+            for (const h of highlights) {
+                const startOffset = h.start_offset;
+                const endOffset = h.end_offset;
+                const color = h.color;
+
+                // Add unhighlighted text between previousEndOffset and startOffset
+                highlightedText += paragraph.substring(previousEndOffset, startOffset);
+
+                // Add highlighted text between startOffset and endOffset
+                highlightedText += `<span style="background-color: ${color};">${paragraph.substring(startOffset, endOffset)}</span>`;
+
+                // Update previousEndOffset
+                previousEndOffset = endOffset;
+            }
+
+            // Add unhighlighted text after the last highlight
+            highlightedText += paragraph.substring(previousEndOffset);
+
+            webText.innerHTML = highlightedText;
+        })
+        .catch(error => console.error(error));
+
 
     // Load Notes
     const lambdaUrl = 'https://dzp2sptvjmcbp3hkjmi34dyhnu0hhwhn.lambda-url.us-east-1.on.aws';
     // Method for passing over variables to the lambda function
-    console.log(user_id, pageUrl, xpath);
 
     const url = `${lambdaUrl}/?userId=${encodeURIComponent(user_id)}&url=${encodeURIComponent(pageUrl)}&xpath=${encodeURIComponent(xpath)}`;
-    console.log(url);
     // call the function and get the response through the data output
     fetch(url)
         .then(response => response.text())
         .then(html => {
             // Inject notes into html page
+            console.log(html);
             if (html) {
                 noteArea.innerHTML = html;
             }
