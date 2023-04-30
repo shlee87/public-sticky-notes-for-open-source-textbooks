@@ -51,8 +51,7 @@
         "content.js"
       ],
       "matches": [
-        "https://*/*",
-        "http://*/*"
+        "https://openstax.org/*"
       ]
     }
   ],
