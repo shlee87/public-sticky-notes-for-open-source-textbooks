@@ -131,7 +131,7 @@ This section contains basic metadata about the extension, such as its name, desc
 Web Accessible Resources
 ########################
 
-This section lists the resources that can be accessed by content scripts or web pages. It specifies the content security policy, resources, and URL patterns that the extension can access.
+This section lists the resources that can be accessed by content scripts or web pages. It specifies the content security policy, resources, and URL patterns that the extension can access:
 .. code-block:: sh
 
    "web_accessible_resources": [
@@ -156,7 +156,7 @@ This section lists the resources that can be accessed by content scripts or web 
 Permissions
 ###########
 
-This section lists the permissions the extension requires, such as the ability to access the active tab, tabs, and scripting.
+This section lists the permissions the extension requires, such as the ability to access the active tab, tabs, and scripting:
 .. code-block:: sh
 
    "permissions": [
@@ -164,6 +164,19 @@ This section lists the permissions the extension requires, such as the ability t
     "tabs",
     "scripting"
    ]
+
+Action
+######
+
+This section defines the default properties for the extension's action, such as the icon, title, and popup HTML file:
+.. code-block:: sh
+
+   "action": {
+    "default_title": "execute.js",
+    "default_icon": "icons/Picture2.png",
+    "default_popup": "Main-Page.html"
+   }
+
 
 
 
