@@ -132,6 +132,7 @@ Web Accessible Resources
 ########################
 
 This section lists the resources that can be accessed by content scripts or web pages. It specifies the content security policy, resources, and URL patterns that the extension can access:
+
 .. code-block:: sh
 
    "web_accessible_resources": [
@@ -157,6 +158,7 @@ Permissions
 ###########
 
 This section lists the permissions the extension requires, such as the ability to access the active tab, tabs, and scripting:
+
 .. code-block:: sh
 
    "permissions": [
@@ -169,6 +171,7 @@ Action
 ######
 
 This section defines the default properties for the extension's action, such as the icon, title, and popup HTML file:
+
 .. code-block:: sh
 
    "action": {
@@ -184,7 +187,7 @@ This section defines the default properties for the extension's action, such as 
 
 
 public-sticky-notes-for-open-source-textbooks/sticky-chrome-extension/login.js
--------------------------------------
+------------------------------------------------------------------------------
 
 Sign up
 ########
