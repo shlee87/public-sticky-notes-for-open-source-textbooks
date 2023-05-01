@@ -258,12 +258,67 @@ Inside the event listener, the event.preventDefault() function is called to prev
    event.preventDefault();
 
 
+Get user input
+##############
+
+The code retrieves the input values provided by the user for their username and password.
+
+.. code-block:: sh
+
+   const username = document.getElementById('username-input').value;
+   const password = document.getElementById('password-input').value;
+
+
+
+Call Auth.signIn
+################
+
+The Auth.signIn function from AWS Amplify is called with the user's inputted username and password. This function will attempt to authenticate the user against the Amazon Cognito User Pool.
+
+.. code-block:: sh
+
+   Auth.signIn(username, password)
+    .then(user => {
+        // ...
+    })
+    .catch(error => {
+        // ...
+    });
 
 
 
 
-Sign up
-########
+
+Handle successful sign-in
+#########################
+
+If the user is successfully signed in, the then block is executed. In this case, it logs the user object to the console and redirects the user to the URL specified in signInConfig.signInSuccessUrl.
+
+.. code-block:: sh
+
+   .then(user => {
+    console.log('Successfully signed in:', user);
+    window.location.href = signInConfig.signInSuccessUrl;
+   })
+
+
+Handle sign-in errors
+#####################
+
+If there is an error during the sign-in process, the catch block is executed. The code checks the error code, and if it is a UserNotConfirmedException, it redirects the user to the confirm email page. For any other error, it displays an error message on the page.
+
+.. code-block:: sh
+
+   .catch(error => {
+    switch (error.code) {
+        case 'UserNotConfirmedException':
+            window.location.href = "/Confirm-Email.html?username=" + username;
+        default:
+            errorMessage.style.display = 'block';
+    }
+   });
+
+
 
 
 
