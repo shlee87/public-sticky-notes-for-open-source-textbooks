@@ -343,6 +343,30 @@ The code first checks if the current page contains a sign-up form by looking for
    }
 
 
+Preventing form submission
+###########################
+
+Inside the event listener, the event.preventDefault() method is called to prevent the form from submitting and refreshing the page, allowing the JavaScript code to handle the sign-up process.
+
+.. code-block:: sh
+
+   event.preventDefault();
+
+
+Retrieving user input
+#####################
+
+The values entered by the user in the form fields are retrieved by accessing the value property of the input elements. The username, email, password, and confirm password fields are read and stored in variables.
+
+.. code-block:: sh
+
+   const username = document.getElementById('username-input').value;
+   const email = document.getElementById('email-input').value;
+   const password = document.getElementById('password-input').value;
+   const con_password = document.getElementById('con-password-input').value;
+
+
+
 
 
 
