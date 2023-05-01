@@ -746,6 +746,47 @@ The custom element is registered using the window.customElements.define() method
 Note
 ----
 
+Defining the CommenterClass
+###########################
+The stickit-commenter.js file starts by defining a custom HTMLElement called CommenterClass, which extends the HTMLElement class. The constructor of this class calls the render() function, which sets up the shadow DOM, attaches event listeners, and sets the initial styles.
+
+
+Marker Position Attribute
+#########################
+The markerPosition attribute in 'stickit-commenter.js' is a getter that retrieves the markerPosition attribute value from the custom element and parses it as a JSON object. The styleElement getter retrieves the style element from the shadow DOM.
+
+Handling Attribute Changes
+##########################
+When the markerPosition attribute in 'stickit-commenter.js' is changed, the attributeChangedCallback method is triggered. This method updates the styles by setting the styleElement's text content with the updated marker position.
+
+
+Commenting Selection
+####################
+When the user clicks the commenting button, the commentSelection() function in 'stickit-commenter.js' is called. This function retrieves the user's selection and, for each range in the selection, calls the commentRange() function.
+
+Commenting Range
+################
+The commentRange() function in 'stickit-commenter.js' handles the process of highlighting the selected text and opening a new window to add a note. It extracts information such as the paragraph text, selected text, offsets, and XPath, then creates a URL to open the AddNote.html page with the extracted information.
+
+Inserting the Comment Template
+##############################
+After extracting the necessary information, the function creates a clone of the comment template, appends the selected content, and inserts the clone into the range. This highlights the selected text with the comment color.
+
+
+Generating XPath
+################
+The getXPath() function in 'stickit-commenter.js' generates an XPath string for the element passed as an argument. This helps in identifying the specific element that contains the selected text.
+
+Saving Notes
+############
+The note.js file defines the logic to save notes to the browser's storage. It retrieves information from the URL, such as the selected text, color, and XPath. It then sets up a note object with this information and a unique ID, and saves it to the browser's storage.
+
+Loading Notes
+#############
+The note.js file also defines the logic to load existing notes from the browser's storage when visiting a web page. It checks the storage for notes related to the current URL, and if it finds any, it uses the stored XPath to locate the corresponding elements on the page. It then highlights the text with the stored color and adds an event listener to show the note when the highlighted text is clicked.
+
+
+
 
 
 
