@@ -212,9 +212,20 @@ This section lists the content scripts that the extension injects into web pages
         "https://openstax.org/*"
       ]
     }
-]
+   ]
 
 
+Background
+##########
+
+This section specifies the background service worker and its type.
+
+.. code-block:: sh
+
+   "background": {
+    "service_worker": "dist/background.js",
+    "type": "module"
+   }
 
 
 
