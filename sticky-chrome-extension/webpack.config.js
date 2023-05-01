@@ -3,7 +3,8 @@ const path = require('path');
 module.exports = {
     entry: {
         login: './src/login.js',
-        note: './src/note.js'
+        note: './src/note.js',
+        background: './src/background.js'
     },
     output: {
         filename: '[name].js',

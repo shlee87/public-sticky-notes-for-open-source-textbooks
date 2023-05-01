@@ -49,6 +49,20 @@ const signInConfig = {
     signInSuccessUrl: '/Main-Page.html',
 };
 
+Auth.currentAuthenticatedUser()
+    .then((user) => {
+        chrome.runtime.sendMessage({
+            action: 'saveId',
+            data: {
+                id: user.attributes.sub,
+                name: user.username
+            }
+        }, function (response) {
+            console.log(response);
+        });
+    })
+    .catch((e) => { console.error(e); });
+
 // Render the authentication UI
 document.addEventListener('DOMContentLoaded', function () {
     Auth.configure({
@@ -113,6 +127,14 @@ document.addEventListener('DOMContentLoaded', function () {
             event.preventDefault();
             Auth.signOut()
                 .then(() => {
+                    chrome.runtime.sendMessage({
+                        action: 'saveId',
+                        data: {
+                            id: '0'
+                        }
+                    }, function (response) {
+                        console.log(response);
+                    });
                     window.location.href = '/Login-Page.html';
                 })
                 .catch(error => {

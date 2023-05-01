@@ -6,14 +6,15 @@
   "web_accessible_resources": [
     {
       "content_security_policy": {
-        "extension_pages": "default-src 'self'; object-src 'self'"
+        "extension_pages": "script-src 'self' 'unsafe-inline' 'chrome-extension://%chrome_extension_id%/*'; object-src 'self'"
       },
       "resources": [
         "dist/note.js",
         "AddNote.html",
         "aws-amplify/**",
         "@aws-amplify/auth/**",
-        "*.html"
+        "*.html",
+        "dist/highlight.js"
       ],
       "matches": [
         "<all_urls>"
@@ -56,7 +57,7 @@
     }
   ],
   "background": {
-    "service_worker": "background.js",
+    "service_worker": "dist/background.js",
     "type": "module"
   },
 
