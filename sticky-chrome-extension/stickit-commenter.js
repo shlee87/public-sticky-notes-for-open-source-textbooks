@@ -1,4 +1,6 @@
-const commentColor = "rgb(255, 0, 0)";
+const commentColor = "rgb(255, 204, 128)";
+//const commentColor = "rgb(255, 204, 0)";
+
 var url;
 
 const commentTemplate = `
@@ -91,33 +93,45 @@ class CommenterClass extends HTMLElement {
     commentRange(range) {
         const pageUrl = window.location.href.split('#')[0];
         try {
-            const paragraph = range.commonAncestorContainer.parentNode.closest('p').textContent;
-            const xpath = this.getXPath(range.commonAncestorContainer.parentNode.closest('p'));
-            console.log(range);
-            const noteUrl = `${chrome.runtime.getURL('AddNote.html')}?url=${encodeURIComponent(pageUrl)}&par=${encodeURIComponent(paragraph)}&start=${encodeURIComponent(range.startOffset)}&end=${encodeURIComponent(range.endOffset)}&color=${encodeURIComponent(commentColor)}&xpath=${encodeURIComponent(xpath)}`;
+            const paragraph = range.commonAncestorContainer.parentNode.closest('p');
+            const paragraphText = paragraph.textContent;
+            const selectedText = range.toString();
+            const startOffset = paragraphText.indexOf(selectedText);
+            const endOffset = startOffset + selectedText.length;
+            const xpath = this.getXPath(paragraph);
+            const noteUrl = `${chrome.runtime.getURL('AddNote.html')}?url=${encodeURIComponent(pageUrl)}&par=${encodeURIComponent(paragraphText)}&start=${encodeURIComponent(startOffset)}&end=${encodeURIComponent(endOffset)}&color=${encodeURIComponent(commentColor)}&xpath=${encodeURIComponent(xpath)}`;
             window.open(noteUrl, '_blank');
-            const clone =
-                this.commentTemplate.cloneNode(true).content.firstElementChild;
+            const clone = this.commentTemplate.cloneNode(true).content.firstElementChild;
             clone.appendChild(range.extractContents());
             range.insertNode(clone);
-        } catch (e) {}
+        } catch (e) { }
     }
 
-    getXPath(element) {
-        var xpath = [];
-        while (element && element.nodeType === Node.ELEMENT_NODE) {
-            let index = 0;
-            var sibling = element.previousSibling;
-            while (sibling) {
-                if (sibling.nodeType === Node.ELEMENT_NODE && sibling.nodeName === element.nodeName) {
-                    index++;
+    getXPath(elm) {
+        var allNodes = document.getElementsByTagName('*');
+        for (var segs = []; elm && elm.nodeType == 1; elm = elm.parentNode) {
+            if (elm.hasAttribute('id')) {
+                var uniqueIdCount = 0;
+                for (var n = 0; n < allNodes.length; n++) {
+                    if (allNodes[n].hasAttribute('id') && allNodes[n].id == elm.id) uniqueIdCount++;
+                    if (uniqueIdCount > 1) break;
+                };
+                if (uniqueIdCount == 1) {
+                    segs.unshift('id("' + elm.getAttribute('id') + '")');
+                    return segs.join('/');
+                } else {
+                    segs.unshift(elm.localName.toLowerCase() + '[@id="' + elm.getAttribute('id') + '"]');
                 }
-                sibling = sibling.previousSibling;
-            }
-            xpath.unshift(element.nodeName.toLowerCase() + '[' + (index + 1) + ']');
-            element = element.parentNode;
-        }
-        return xpath.join('/');
+            } else if (elm.hasAttribute('class')) {
+                segs.unshift(elm.localName.toLowerCase() + '[@class="' + elm.getAttribute('class') + '"]');
+            } else {
+                for (i = 1, sib = elm.previousSibling; sib; sib = sib.previousSibling) {
+                    if (sib.localName == elm.localName) i++;
+                };
+                segs.unshift(elm.localName.toLowerCase() + '[' + i + ']');
+            };
+        };
+        return segs.length ? '/' + segs.join('/') : null;
     }
 }
 
