@@ -108,19 +108,22 @@ Folders & files
 .. ---------------------------------------------
 
 public-sticky-notes-for-open-source-textbooks/sticky-chrome-extension/manifest.json
--------------------------------------
+-----------------------------------------------------------------------------------
 The manifest.json file is a configuration file for a Chrome extension. It provides important information about the extension, such as its name, version, and permissions. It also specifies how the extension should behave and interact with web pages. The manifest.json file you provided can be broken down into the following sections:
 
 
-Basic Information: This section contains basic metadata about the extension, such as its name, description, version, and manifest version.
+Building
+########
+
+To build StickIT for development:
 
 .. code-block:: sh
-   {
-  "name": "StickIT",
-  "description": "Sticky Notes On Open Source Textbooks",
-  "version": "0.0.1",
-  "manifest_version": 3
-   }
+
+   git clone 'https://github.com/shlee87/public-sticky-notes-for-open-source-textbooks.git'
+   cd public-sticky-notes-for-open-source-textbooks
+   npm run build
+
+You now have a development built. 
 
 
 public-sticky-notes-for-open-source-textbooks/sticky-chrome-extension/login.js
