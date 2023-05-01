@@ -529,6 +529,98 @@ If any errors occur during the search process, they are caught and logged to the
    }
 
 
+Logout
+------
+
+Accessing the logout button
+#############################
+The code checks if the current page contains a logout button by looking for an element with the ID logout-button. If the button is found, an event listener is attached to it.
+
+.. code-block:: sh
+
+   if (logoutButton) {
+    logoutButton.addEventListener('click', function (event) {
+        // ...
+    });
+   }
+
+
+Preventing default button behavior
+##################################
+Inside the event listener, the event.preventDefault() method is called to prevent the button's default behavior, allowing the JavaScript code to handle the logout process.
+
+.. code-block:: sh
+
+   event.preventDefault();
+
+Signing out the user:
+#####################
+The Auth.signOut() method is called to sign out the current user from the authentication system.
+
+.. code-block:: sh
+
+   Auth.signOut()
+    .then(() => {
+        // ...
+    })
+    .catch(error => {
+        // ...
+    });
+
+
+Clearing the user ID
+####################
+After successfully signing out, a message is sent to the background script to clear the user ID by setting it to '0'. This ensures that the user is fully logged out and their information is no longer accessible.
+
+.. code-block:: sh
+
+   chrome.runtime.sendMessage({
+    action: 'saveId',
+    data: {
+        id: '0'
+    }
+   }, function (response) {
+    console.log(response);
+   });
+
+
+Redirecting to the login page
+#############################
+Once the user is successfully logged out and their ID is cleared, the window location is changed to the login page, effectively redirecting the user to the login page.
+
+.. code-block:: sh
+
+   window.location.href = '/Login-Page.html';
+
+
+Handling logout errors
+######################
+If any errors occur during the logout process, they are caught and logged to the console.
+
+.. code-block:: sh
+
+   catch(error => {
+    console.error('Error signing out:', error);
+   });
+
+
+
+
+
+
+
+Highlight
+---------
+
+Note
+----
+
+AWS Integration
+---------------
+
+
+Database
+--------
 
 
 
