@@ -322,6 +322,26 @@ If there is an error during the sign-in process, the catch block is executed. Th
     }
    });
 
+Sign-up
+-------
+
+Sign-up feature has been implemented on login.js.
+public-sticky-notes-for-open-source-textbooks/sticky-chrome-extension/login.js
+
+
+Accessing the sign-up form
+###########################
+
+The code first checks if the current page contains a sign-up form by looking for an element with the ID sign-up-form. If the form is found, an event listener is attached to it.
+
+.. code-block:: sh
+
+   else if (signUpForm) {
+    signUpForm.addEventListener('submit', function (event) {
+        // ...
+    });
+   }
+
 
 
 
