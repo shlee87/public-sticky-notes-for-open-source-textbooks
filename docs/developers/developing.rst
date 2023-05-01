@@ -604,16 +604,154 @@ If any errors occur during the logout process, they are caught and logged to the
    });
 
 
-
-
-
-
-
 Highlight
 ---------
 
+Defining the Highlight Template and Styles
+##########################################
+The highlightTemplate is defined as an HTML string containing a button with an SVG icon for text highlighting. The highlightStyled function takes a configuration object as input and generates a string containing the styling rules for the highlighting button.
+
+.. code-block:: sh
+
+   const highlightColor = "rgb(255, 242, 153)";
+   const highlightTemplate = `
+     ...
+     `;
+
+   const highlightStyled = ({ display = "none", left = 0, top = 0 }) => `
+   ...
+   `;
+
+Creating the HighlighterClass Custom Element
+############################################
+The HighlighterClass is a custom HTMLElement class that extends the HTMLElement class. The constructor of this class calls the render() function, which sets up the shadow DOM, attaches event listeners, and sets the initial styles.
+
+.. code-block:: sh
+
+   class HighlighterClass extends HTMLElement {
+    constructor() {
+        super();
+        this.render();
+    }
+    ...
+   }
+
+
+
+Handling Attribute Changes
+##########################
+When the markerPosition attribute is changed, the attributeChangedCallback method is triggered. This method updates the styles by setting the styleElement's text content with the updated marker position.
+
+.. code-block:: sh
+
+   attributeChangedCallback(name, oldValue, newValue) {
+    if (name === "markerPosition") {
+        this.styleElement.textContent = highlightStyled(this.markerPosition);
+    }
+   }
+
+
+
+
+Highlighting the Selected Text
+##############################
+When the user clicks the highlighting button, the highlightSelection() function is called. This function retrieves the user's selection and, for each range in the selection, calls the highlightRange() function.
+
+
+.. code-block:: sh
+
+   highlightSelection() {
+    var userSelection = window.getSelection();
+    for (let i = 0; i < userSelection.rangeCount; i++) {
+        this.highlightRange(userSelection.getRangeAt(i));
+    }
+    window.getSelection().empty();
+   }
+
+
+
+Highlighting a Range
+####################
+The highlightRange() function handles the process of highlighting the selected text within the range. It extracts information such as the paragraph, selected text, offsets, and XPath, then saves the highlight information using the chrome.runtime.sendMessage method.
+
+.. code-block:: sh
+
+   async highlightRange(range) {
+    ...
+    if (paragraph) {
+        const result = await new Promise((resolve) => {
+            chrome.runtime.sendMessage({
+                action: 'saveHighlight',
+                data: {
+                    url: pageUrl,
+                    text: selectedText,
+                    start: startOffset,
+                    end: endOffset,
+                    color: highlightColor,
+                    xpath: xpath
+                }
+            }, function (response) {
+                resolve(response.message);
+            });
+        });
+
+        if (result) {
+            const clone = this.highlightTemplate.cloneNode(true).content.firstElementChild;
+            clone.appendChild(range.extractContents());
+            range.insertNode(clone);
+        }
+    }
+   }
+
+
+
+
+Generating XPath
+################
+The getXPath() function generates an XPath string for the element passed as an argument. This helps in identifying the specific element that contains the selected text.
+
+.. code-block:: sh
+
+   getXPath(elm) {
+    ...
+   }
+
+
+Loading Highlights
+##################
+The loadHighlights() function is called after defining the custom element. It retrieves the highlights for the current URL and inserts the highlighted text into the corresponding elements on the page.
+
+.. code-block:: sh
+
+   async function loadHighlights() {
+    ...
+   }
+
+
+
+Registering the Custom Element and Loading Highlights
+#####################################################
+The custom element is registered using the window.customElements.define() method. The loadHighlights() function is called to retrieve and display the highlights for the current URL.
+
+.. code-block:: sh
+
+   window.customElements.define("stickit-highlighter", HighlighterClass);
+   loadHighlights();
+
+
+
+
+
+
 Note
 ----
+
+
+
+
+
+
+
 
 AWS Integration
 ---------------
