@@ -408,6 +408,18 @@ If the sign-up is successful, the user is redirected to the confirm email page. 
     window.location.href = "/Confirm-Email.html?username=" + username;
    })
 
+Handling sign-up errors
+#######################
+
+If there's an error during sign-up, the error message is displayed to the user.
+
+.. code-block:: sh
+
+   .catch(error => {
+    errorMessage.style.display = 'block';
+   });
+
+
 
 
 
