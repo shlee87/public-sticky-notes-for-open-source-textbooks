@@ -487,51 +487,48 @@ The code checks the state of the PrivateToggle checkbox. If it's checked, the se
 
 
 
-Authenticating the user and getting the token:
-##############################################
-The Auth.currentAuthenticatedUser() method is called to get the current authenticated user's information. From this information, the user's ID token is retrieved.
+Making a POST request to the API Gateway
+########################################
+A POST request is made to the API Gateway endpoint with the necessary headers and request body. The request body includes the search term, privacy setting, and user ID.
 
 .. code-block:: sh
 
-   const user = await Auth.currentAuthenticatedUser();
-   const token = user.signInUserSession.idToken.jwtToken;
+   const response = await fetch(apiGatewayUrl, {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+    },
+    body: JSON.stringify({ keyword: searchTerm, isPrivate: Private, user_id: userId }),
+   });
 
 
 
-Authenticating the user and getting the token:
-##############################################
-The Auth.currentAuthenticatedUser() method is called to get the current authenticated user's information. From this information, the user's ID token is retrieved.
-
-.. code-block:: sh
-
-   const user = await Auth.currentAuthenticatedUser();
-   const token = user.signInUserSession.idToken.jwtToken;
 
 
-Authenticating the user and getting the token:
-##############################################
-The Auth.currentAuthenticatedUser() method is called to get the current authenticated user's information. From this information, the user's ID token is retrieved.
+Processing the search results
+#############################
+The search results returned from the API Gateway are processed using the displayResults function. This function updates the results container with the relevant search results.
 
 .. code-block:: sh
 
-   const user = await Auth.currentAuthenticatedUser();
-   const token = user.signInUserSession.idToken.jwtToken;
+   response.json().then((data) => {
+    displayResults(data.body);
+   });
 
 
-Authenticating the user and getting the token:
+
+Handling errors during the search process:
 ##############################################
-The Auth.currentAuthenticatedUser() method is called to get the current authenticated user's information. From this information, the user's ID token is retrieved.
+If any errors occur during the search process, they are caught and logged to the console.
 
 .. code-block:: sh
 
-   const user = await Auth.currentAuthenticatedUser();
-   const token = user.signInUserSession.idToken.jwtToken;
+   catch (error) {
+    console.error("Error calling API Gateway:", error);
+   }
 
 
 
 
-Highlight
-#########
 
-Note
-####
