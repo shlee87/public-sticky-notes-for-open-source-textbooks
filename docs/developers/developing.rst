@@ -230,9 +230,13 @@ This section specifies the background service worker and its type.
 
 
 
-public-sticky-notes-for-open-source-textbooks/sticky-chrome-extension/login.js
-------------------------------------------------------------------------------
+.. public-sticky-notes-for-open-source-textbooks/sticky-chrome-extension/login.js
+.. ------------------------------------------------------------------------------
+Sign-in
+-------
 
+Sign-in feature has been implemented on login.js.
+public-sticky-notes-for-open-source-textbooks/sticky-chrome-extension/login.js
 
 Sign-in form event listener
 ###########################
