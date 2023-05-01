@@ -366,6 +366,17 @@ The values entered by the user in the form fields are retrieved by accessing the
    const con_password = document.getElementById('con-password-input').value;
 
 
+Checking password match
+#######################
+
+A conditional statement checks if the password and confirm password fields match. If they don't, an error message is displayed to the user.
+
+.. code-block:: sh
+
+   if (password !== con_password) {
+    errorMessage.style.display = 'block';
+   }
+
 
 
 
