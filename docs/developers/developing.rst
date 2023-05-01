@@ -248,6 +248,17 @@ The code first checks if the sign-in form exists on the page. If it does, it add
    }
 
 
+Prevent default form submission
+###############################
+
+Inside the event listener, the event.preventDefault() function is called to prevent the default form submission behavior, which would cause the page to reload.
+
+.. code-block:: sh
+
+   event.preventDefault();
+
+
+
 
 
 
