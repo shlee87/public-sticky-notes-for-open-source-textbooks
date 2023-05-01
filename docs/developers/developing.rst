@@ -793,6 +793,9 @@ Database
 --------
 The database consists of two tables: highlights and notes. The highlights table stores the highlighted text, color, and XPath for each highlight. The notes table stores the note text, color, and XPath for each note.
 
+StickIT.Highlights
+##################
+
 Here are some additional details on 'StickIT.Highlights' table:
 
 id: This column is likely the primary key for the table and is set to auto-increment. This means that each row in the table will have a unique value for this column, and the database will automatically assign new values as new rows are inserted.
