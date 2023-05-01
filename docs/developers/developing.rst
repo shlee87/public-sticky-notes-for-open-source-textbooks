@@ -109,7 +109,7 @@ Folders & files
 
 public-sticky-notes-for-open-source-textbooks/sticky-chrome-extension/manifest.json
 -------------------------------------
-
+The manifest.json file is a configuration file for a Chrome extension. It provides important information about the extension, such as its name, version, and permissions. It also specifies how the extension should behave and interact with web pages. The manifest.json file you provided can be broken down into the following sections:
 
 
 public-sticky-notes-for-open-source-textbooks/sticky-chrome-extension/login.js
