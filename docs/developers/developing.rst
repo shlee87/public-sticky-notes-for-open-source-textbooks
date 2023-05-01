@@ -233,11 +233,28 @@ This section specifies the background service worker and its type.
 public-sticky-notes-for-open-source-textbooks/sticky-chrome-extension/login.js
 ------------------------------------------------------------------------------
 
+
+Sign-in form event listener
+###########################
+
+The code first checks if the sign-in form exists on the page. If it does, it adds a submit event listener to the form. This event listener will be triggered when the user clicks the submit button or presses enter while the form is in focus.
+
+.. code-block:: sh
+
+   if (signInForm) {
+    signInForm.addEventListener('submit', function (event) {
+        // ...
+    });
+   }
+
+
+
+
+
 Sign up
 ########
 
-Sign In
-#######
+
 
 Search
 ######
