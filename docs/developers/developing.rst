@@ -84,28 +84,28 @@ Lambda functions interact with the RDS database to store or retrieve annotation 
 
 Folders & files
 ====================
-This sections explain how the folders and files are organized in StickIT.
+.. This sections explain how the folders and files are organized in StickIT.
 
 
-Folders
----------------------------------------------
+.. Folders
+.. ---------------------------------------------
 
-public-sticky-notes-for-open-source-textbooks/sticky-chrome-extension
-#####################################################################
-this is a folder that has all files for the chrome extension.
+.. public-sticky-notes-for-open-source-textbooks/sticky-chrome-extension
+.. #####################################################################
+.. this is a folder that has all files for the chrome extension.
 
-public-sticky-notes-for-open-source-textbooks/docs
-##################################################
-This folder houses all the files related to code documentation.
+.. public-sticky-notes-for-open-source-textbooks/docs
+.. ##################################################
+.. This folder houses all the files related to code documentation.
 
-public-sticky-notes-for-open-source-textbooks/lambda
-#####################################################
-This folder contains function files for AWS lambda.
+.. public-sticky-notes-for-open-source-textbooks/lambda
+.. #####################################################
+.. This folder contains function files for AWS lambda.
 
 
 
-feature-related files
----------------------------------------------
+.. feature-related files
+.. ---------------------------------------------
 
 Sign up
 ########
