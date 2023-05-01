@@ -128,6 +128,47 @@ This section contains basic metadata about the extension, such as its name, desc
 
 
 
+Web Accessible Resources
+########################
+
+This section lists the resources that can be accessed by content scripts or web pages. It specifies the content security policy, resources, and URL patterns that the extension can access.
+.. code-block:: sh
+
+   "web_accessible_resources": [
+    {
+      "content_security_policy": {
+        "extension_pages": "script-src 'self' 'unsafe-inline' 'chrome-extension://%chrome_extension_id%/*'; object-src 'self'"
+      },
+      "resources": [
+        "dist/note.js",
+        "AddNote.html",
+        "aws-amplify/**",
+        "@aws-amplify/auth/**",
+        "*.html",
+        "dist/highlight.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+   ]
+
+Permissions
+###########
+
+This section lists the permissions the extension requires, such as the ability to access the active tab, tabs, and scripting.
+.. code-block:: sh
+
+   "permissions": [
+    "activeTab",
+    "tabs",
+    "scripting"
+   ]
+
+
+
+
+
 
 public-sticky-notes-for-open-source-textbooks/sticky-chrome-extension/login.js
 -------------------------------------
