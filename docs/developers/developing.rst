@@ -107,6 +107,14 @@ Folders & files
 .. feature-related files
 .. ---------------------------------------------
 
+public-sticky-notes-for-open-source-textbooks/sticky-chrome-extension/manifest.json
+-------------------------------------
+
+
+
+public-sticky-notes-for-open-source-textbooks/sticky-chrome-extension/login.js
+-------------------------------------
+
 Sign up
 ########
 
