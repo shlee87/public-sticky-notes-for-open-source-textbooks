@@ -32,14 +32,14 @@ You now have a development built.
 
 
 
-you'll need a local copy of either the Hypothesis Chrome extension or
-h. Follow either :ref:`running-from-browser-ext` or
-:ref:`running-from-h` below.
-If you're only interested in making changes to the client (and not to h)
-then running the client from the browser extension is easiest.
+.. you'll need a local copy of either the Hypothesis Chrome extension or
+.. h. Follow either :ref:`running-from-browser-ext` or
+.. :ref:`running-from-h` below.
+.. If you're only interested in making changes to the client (and not to h)
+.. then running the client from the browser extension is easiest.
 
 
-.. _running-from-browser-ext:
+.. .. _running-from-browser-ext:
 
 Running the Chrome extension
 ---------------------------------------------
