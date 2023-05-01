@@ -124,12 +124,8 @@ This section contains basic metadata about the extension, such as its name, desc
   "description": "Sticky Notes On Open Source Textbooks",
   "version": "0.0.1",
   "manifest_version": 3
-}
+  }
 
-   
-   git clone 'https://github.com/shlee87/public-sticky-notes-for-open-source-textbooks.git'
-   cd public-sticky-notes-for-open-source-textbooks
-   npm run build
 
 
 
