@@ -236,7 +236,7 @@ Sign-in
 -------
 
 Sign-in feature has been implemented on login.js.
-public-sticky-notes-for-open-source-textbooks/sticky-chrome-extension/login.js
+public-sticky-notes-for-open-source-textbooks/sticky-chrome-extension/src/login.js
 
 Sign-in form event listener
 ###########################
@@ -422,15 +422,113 @@ If there's an error during sign-up, the error message is displayed to the user.
 
 
 
-
-
-
-
-
-
-
 Search
-######
+------
+Search feature has been implemented on login.js.
+public-sticky-notes-for-open-source-textbooks/sticky-chrome-extension/src/login.js.
+
+
+Accessing the search form
+#########################
+The code checks if the current page contains a search form by looking for an element with the class u-search. If the form is found, an event listener is attached to it.
+
+.. code-block:: sh
+
+   if (searchForm) {
+    searchForm.addEventListener('submit', async (event) => {
+        // ...
+    });
+}
+
+
+Preventing form submission:
+##########################
+Inside the event listener, the event.preventDefault() method is called to prevent the form from submitting and refreshing the page, allowing the JavaScript code to handle the search process.
+
+
+.. code-block:: sh
+
+   event.preventDefault();
+
+
+Retrieving search term
+######################
+The value entered by the user in the search input field is retrieved by accessing the value property of the input element and trimming any leading or trailing whitespace.
+
+.. code-block:: sh
+
+   const searchTerm = searchInput.value.trim();
+
+
+
+Checking if the search term is empty
+####################################
+A conditional statement checks if the search term is empty. If it is, the results container is reset to display the default content.
+
+.. code-block:: sh
+
+   if (searchTerm == "") {
+    // Reset results container to display default content
+   }
+
+
+
+Determining the privacy setting
+###############################
+The code checks the state of the PrivateToggle checkbox. If it's checked, the search will be performed only for private comments. Otherwise, the search will include public comments.
+
+.. code-block:: sh
+
+   if (PrivateToggle.checked == true) {
+    Private = "true";
+   } else {
+    Private = "false";
+   }
+
+
+
+Authenticating the user and getting the token:
+##############################################
+The Auth.currentAuthenticatedUser() method is called to get the current authenticated user's information. From this information, the user's ID token is retrieved.
+
+.. code-block:: sh
+
+   const user = await Auth.currentAuthenticatedUser();
+   const token = user.signInUserSession.idToken.jwtToken;
+
+
+
+Authenticating the user and getting the token:
+##############################################
+The Auth.currentAuthenticatedUser() method is called to get the current authenticated user's information. From this information, the user's ID token is retrieved.
+
+.. code-block:: sh
+
+   const user = await Auth.currentAuthenticatedUser();
+   const token = user.signInUserSession.idToken.jwtToken;
+
+
+Authenticating the user and getting the token:
+##############################################
+The Auth.currentAuthenticatedUser() method is called to get the current authenticated user's information. From this information, the user's ID token is retrieved.
+
+.. code-block:: sh
+
+   const user = await Auth.currentAuthenticatedUser();
+   const token = user.signInUserSession.idToken.jwtToken;
+
+
+Authenticating the user and getting the token:
+##############################################
+The Auth.currentAuthenticatedUser() method is called to get the current authenticated user's information. From this information, the user's ID token is retrieved.
+
+.. code-block:: sh
+
+   const user = await Auth.currentAuthenticatedUser();
+   const token = user.signInUserSession.idToken.jwtToken;
+
+
+
 
 Highlight
 #########
