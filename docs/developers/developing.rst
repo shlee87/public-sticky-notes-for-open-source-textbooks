@@ -799,10 +799,15 @@ StickIT.Highlights
 Here are some additional details on 'StickIT.Highlights' table:
 
 id: This column is likely the primary key for the table and is set to auto-increment. This means that each row in the table will have a unique value for this column, and the database will automatically assign new values as new rows are inserted.
+
 page_url: This column likely stores the URL of the web page where the text was found.
+
 highlighted_text: This column likely stores the text that was highlighted on the web page.
+
 userId: This column likely stores a unique identifier for the user who created the highlight. This could be used to associate the highlight with a particular user account.
+
 color: This column likely stores the color of the highlight, which could be used to display highlights in different colors on a web page.
+
 xpath: This column likely stores the XPath expression that was used to locate the highlighted text on the web page.
 
 
