@@ -181,6 +181,39 @@ This section defines the default properties for the extension's action, such as 
    }
 
 
+Content Scripts
+###############
+
+This section lists the content scripts that the extension injects into web pages. It specifies when the scripts should run and the URL patterns they should match.
+
+.. code-block:: sh
+
+   "content_scripts": [
+    {
+      "run_at": "document_start",
+      "js": [
+        "before.js"
+      ],
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ]
+    },
+    {
+      "run_at": "document_idle",
+      "js": [
+        "after.js",
+        "node_modules/@webcomponents/custom-elements/custom-elements.min.js",
+        "stickit-highlighter.js",
+        "stickit-commenter.js",
+        "content.js"
+      ],
+      "matches": [
+        "https://openstax.org/*"
+      ]
+    }
+]
+
 
 
 
