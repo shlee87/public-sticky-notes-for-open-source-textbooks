@@ -378,6 +378,42 @@ A conditional statement checks if the password and confirm password fields match
    }
 
 
+Signing up the user
+###################
+
+If the passwords match, the Auth.signUp() method from the Amplify library is called to create a new user account. The provided username, password, and email are passed as arguments. The autoSignIn option is enabled to automatically sign the user in after a successful sign-up.
+
+.. code-block:: sh
+
+   else {
+    Auth.signUp({ username, password, attributes: { email }, autoSignIn: { enabled: true } })
+        .then(user => {
+            // ...
+        })
+        .catch(error => {
+            // ...
+        });
+   }
+
+
+Handling successful sign-up
+###########################
+
+If the sign-up is successful, the user is redirected to the confirm email page. The username is passed as a query parameter in the URL.
+
+.. code-block:: sh
+
+   .then(user => {
+    console.log('Successfully signed up:', user);
+    window.location.href = "/Confirm-Email.html?username=" + username;
+   })
+
+
+
+
+
+
+
 
 
 
