@@ -77,6 +77,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const forgotForm = document.getElementById('forgot-form');
     const searchForm = document.querySelector(".u-search");
     const searchInput = document.querySelector(".u-search-input");
+
     var PrivateToggle = document.getElementById("privateToggle");
     var Private;
 
@@ -124,6 +125,15 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
     else if (logoutButton) {
+        const username = document.getElementById('profile-username');
+        const email = document.getElementById('profile-email');
+
+        Auth.currentAuthenticatedUser()
+            .then(user => {
+                username.innerHTML = "Username: " + user.username;
+                email.innerHTML = "Email: " + user.attributes.email;
+            })
+
         logoutButton.addEventListener('click', function (event) {
             event.preventDefault();
             Auth.signOut()
